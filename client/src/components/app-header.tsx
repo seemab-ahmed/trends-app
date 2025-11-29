@@ -115,7 +115,7 @@ export default function AppHeader() {
         <div className="flex items-center space-x-4 min-w-0">
           <Link href="/" className="flex items-center">
             <span
-              className="text-gray-900 font-semibold text-2xl leading-none whitespace-nowrap"
+              className="text-gray-900 font-semibold lg:text-2xl text-[20px] leading-none whitespace-nowrap"
               style={{ fontFamily: "Poppins, sans-serif" }}
             >
               {pageTitle}

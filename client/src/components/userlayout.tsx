@@ -38,7 +38,7 @@ const UserLayout: React.FC<UserLayoutProps> = ({ children }) => {
         onClick={() => setMobileMenuOpen(false)}
       >
         <div
-          className={`absolute right-0 top-0 h-full w-64 bg-[#1C1F26] shadow-lg p-4 transform transition-transform duration-300 ${
+          className={`absolute right-0 top-0 h-full w-[256px] bg-[#1C1F26] shadow-lg  transform transition-transform duration-300 ${
             mobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
           onClick={(e) => e.stopPropagation()}

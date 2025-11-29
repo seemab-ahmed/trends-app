@@ -81,7 +81,7 @@ export default function MiniLeaderboard() {
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="px-3 py-6 shadow-[0_0_10px_rgba(0,0,0,0.15)] grid rounded-[10px] grid-cols-3 gap-4 ">
+      <CardContent className="px-3 py-6 shadow-[0_0_10px_rgba(0,0,0,0.15)] grid rounded-[10px] xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-4 ">
         {/* --- Leaderboard --- */}
         {isLoading ? (
           <div className="text-xs text-neutral-400">Loading...</div>
@@ -173,7 +173,7 @@ export default function MiniLeaderboard() {
         {/* --- Special Titles --- */}
         
           {/* 🏆 Stock King */}
-          <div className="flex items-start relative justify-center flex-col gap-3  rounded-[10px]  p-6 bg-gradient-to-r from-red-600 to-red-400">
+          <div className="flex h-[214px] items-start relative justify-center flex-col gap-3  rounded-[10px]  p-6 bg-gradient-to-r from-red-600 to-red-400">
             <div className="flex items-center gap-4 mt-[-30px]  ">
               <Crown className="h-[50px] w-[50px] text-white" />
               <span className="text-[20px] font-[600] text-white">Stock King</span>
@@ -210,7 +210,7 @@ export default function MiniLeaderboard() {
           </div>
 
           {/* 👑 Crypto King */}
-          <div className="flex justify-center relative bg-gradient-to-r from-yellow-600 to-yellow-300 flex-col gap-3 items-start  rounded-[10px]  p-6">
+          <div className="flex h-[214px] justify-center relative bg-gradient-to-r from-yellow-600 to-yellow-300 flex-col gap-3 items-start  rounded-[10px]  p-6">
             <div className="flex items-center gap-4 mt-[-30px]">
               <Crown className="h-[50px] w-[50px] text-white" />
               <span className="text-[20px] font-[600] text-white">

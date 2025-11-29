@@ -17,7 +17,7 @@ export function LanguageSelectorButton() {
       <DropdownMenuTrigger asChild>
         <Button
           size="sm"
-          className="h-9 gap-1 bg-[#fff] text-black border border-gray-300 hover:bg-blue-700 hover:text-white"
+          className="md:h-9 h-[48px] md:w-fit w-full px-6 flex items-center !rounded-l-xl md:rounded-md gap-1 md:bg-[#fff] bg-tranperent md:text-black text-white md:border md:border-gray-300 md:hover:bg-blue-700 hover:bg-white md:hover:text-white hover:text-black"
         >
           <Globe className="h-4 w-4" />
           <span>{language === "en" ? "EN" : "IT"}</span>

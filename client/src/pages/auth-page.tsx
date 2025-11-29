@@ -6,6 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
+import { Image } from "lucide-react";
+import Authbg  from "../../public/images/auth-bg.png"
 import {
   Card,
   CardContent,
@@ -263,9 +265,22 @@ export default function AuthPage() {
 
   return (
     // bg-gradient-to-l from-[#22263D] via-[#11131E] to-[#05070C] 
-    <div className="min-h-screen flex flex-col lg:flex-row bg-gradient-to-l from-[#22263D] via-[#11131E] to-[#05070C]  ">
-      <div className="flex-1 flex items-center justify-center py-12 px-8 lg:px-4">
-        <Card className="w-full max-w-md bg-white rounded-2xl border-0 py-5 px-8 shadow-[0_0_10px_rgba(0,0,0,0.15)]">
+    <div className="min-h-screen flex flex-col lg:flex-row relative  ">
+      <div className="absolute top-0 left-0 w-full h-full">
+        <img src={Authbg} alt="Auth Background" className="w-full h-full object-cover" />
+      </div>
+
+      <div className="flex-1 relative z-[3] flex items-center justify-center py-12 md:px-8 px-5 lg:px-4">
+        <Card className="w-full relative max-w-[500px] bg-white rounded-2xl border-0 lg:py-5 lg:px-8 p-5 pt-[50px] shadow-[0_0_10px_rgba(0,0,0,0.15)]">
+          
+          <div className=" flex items-center gap-2 absolute top-2 right-2 lg:hidden block">
+          <img
+            src="/images/trend-logo.png"
+            alt="Trend Logo"
+            className="h-10 w-10 object-contain"
+          />
+          <span className="text-black text-3xl font-semibold">Trend</span>
+        </div>         
           <CardContent className="p-0">
             <div className="text-center mb-4">
               <h1 className="text-3xl font-bold text-black mb-4 text-left">
@@ -287,10 +302,10 @@ export default function AuthPage() {
               onValueChange={setActiveTab}
               className="w-full"
             >
-              <div className="flex space-x-1 mb-4 rounded-full p-2 bg-gray-300/50 justify-between">
+              <div className="flex space-x-1 mb-4 rounded-full overflow-x-scroll no-scrollbar p-2 bg-gray-300/50 justify-between">
                 <button
                   onClick={() => setActiveTab("login")}
-                  className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                  className={`px-6 py-2 rounded-full md:text-sm text-[12px] font-[600] transition-all min-w-[90px] ${
                     activeTab === "login"
                       ? "bg-blue-600 text-white"
                       : "text-black hover:text-black/80"
@@ -300,7 +315,7 @@ export default function AuthPage() {
                 </button>
                 <button
                   onClick={() => setActiveTab("register")}
-                  className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                  className={`px-6 py-2 rounded-full md:text-sm text-[12px] font-[600] transition-all  min-w-[90px] ${
                     activeTab === "register"
                       ? "bg-blue-600 text-white"
                       : "text-black hover:text-black/80"
@@ -310,7 +325,7 @@ export default function AuthPage() {
                 </button>
                 <button
                   onClick={() => setActiveTab("reset-password")}
-                  className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                  className={`px-6 py-2 rounded-full md:text-sm text-[12px] font-[600] transition-all  min-w-[140px] ${
                     activeTab === "reset-password"
                       ? "bg-blue-600 text-white"
                       : "text-black hover:text-black/80"
@@ -382,7 +397,7 @@ export default function AuthPage() {
                     />
                     <Button
                       type="submit"
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full h-12 text-base"
+                      className="w-full bg-blue-600 hover:bg-blue-700 justify-center text-white font-semibold rounded-full h-12 text-base"
                       disabled={loginMutation.isPending}
                     >
                       {loginMutation.isPending ? (
@@ -410,7 +425,7 @@ export default function AuthPage() {
                     {/* Google Sign-in Button */}
                     <Button
                       type="button"
-                      className="w-full bg-transparent hover:bg-blue-600 hover:text-white text-black border-0 rounded-full h-12 text-base font-medium cursor-pointer transition-all ease-in-out duration-500"
+                      className="w-full bg-transparent hover:bg-blue-600 justify-center !text-center hover:text-white text-black border-0 rounded-full h-12 text-base font-medium cursor-pointer transition-all ease-in-out duration-500"
                       onClick={handleGoogleSignIn}
                       disabled={isGoogleLoading}
                     >
@@ -447,7 +462,7 @@ export default function AuthPage() {
                     {/* Apple Sign-in Button */}
                     <Button
                       type="button"
-                      className="w-full bg-transparent hover:bg-blue-600 hover:text-white text-black border-0 rounded-full h-12 text-base font-medium cursor-pointer transition-all ease-in-out duration-500"
+                      className="w-full text-center bg-transparent justify-center hover:bg-blue-600 hover:text-white text-black border-0 rounded-full h-12 text-base font-medium cursor-pointer transition-all ease-in-out duration-500"
                       disabled={isGoogleLoading}
                     >
                       <svg
@@ -656,7 +671,7 @@ export default function AuthPage() {
                     {/* Google Sign-up Button */}
                     <Button
                       type="button"
-                      className="w-full bg-transparent hover:bg-blue-700 hover:text-white transition-all ease-in-out duration-500  text-black border-0 rounded-full h-12 text-base font-medium cursor-pointer"
+                      className="w-full bg-transparent !text-center justify-center hover:bg-blue-700 hover:text-white transition-all ease-in-out duration-500  text-black border-0 rounded-full h-12 text-base font-medium cursor-pointer"
                       onClick={handleGoogleSignIn}
                       disabled={isGoogleLoading}
                     >
@@ -693,7 +708,7 @@ export default function AuthPage() {
                     {/* Apple Sign-up Button */}
                     <Button
                       type="button"
-                      className="w-full bg-transparent hover:bg-blue-700 hover:text-white transition-all ease-in-out duration-500 text-black border-0 rounded-full h-12 text-base font-medium cursor-pointer"
+                      className="w-full bg-transparent text-center justify-center hover:bg-blue-700 hover:text-white transition-all ease-in-out duration-500 text-black border-0 rounded-full h-12 text-base font-medium cursor-pointer"
                       disabled={isGoogleLoading}
                     >
                       <svg
@@ -755,7 +770,7 @@ export default function AuthPage() {
                     />
                     <Button
                       type="submit"
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white transition-all ease-in-out duration-500  font-semibold rounded-full h-12 text-base"
+                      className="w-full bg-blue-600 hover:bg-blue-700 justify-center text-white transition-all ease-in-out duration-500  font-semibold rounded-full h-12 text-base"
                       disabled={requestPasswordResetMutation.isPending}
                     >
                       {requestPasswordResetMutation.isPending ? (
@@ -836,7 +851,7 @@ export default function AuthPage() {
                                 type="button"
                                 variant="ghost"
                                 size="sm"
-                                className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent text-black/60"
+                                className="absolute right-0 top-0 justify-center h-full px-3 py-2 hover:bg-transparent text-black/60"
                                 onClick={() => setShowPassword(!showPassword)}
                               >
                                 {showPassword ? (
@@ -871,7 +886,7 @@ export default function AuthPage() {
                                 type="button"
                                 variant="ghost"
                                 size="sm"
-                                className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent text-black/60"
+                                className="absolute right-0 justify-center top-0 h-full px-3 py-2 hover:bg-transparent text-black/60"
                                 onClick={() =>
                                   setShowConfirmPassword(!showConfirmPassword)
                                 }
@@ -890,7 +905,7 @@ export default function AuthPage() {
                     />
                     <Button
                       type="submit"
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-black font-semibold rounded-xl h-12 text-base"
+                      className="w-full bg-blue-600 hover:bg-blue-700 justify-center text-black font-semibold rounded-xl h-12 text-base"
                       disabled={resetPasswordMutation.isPending}
                     >
                       {resetPasswordMutation.isPending ? (
@@ -906,7 +921,7 @@ export default function AuthPage() {
                       <Button
                         type="button"
                         onClick={() => setActiveTab("login")}
-                        className="text-black/80 hover:text-black text-sm underline"
+                        className="text-black/80 hover:text-black justify-center text-sm underline"
                       >
                         Back to login
                       </Button>
@@ -921,7 +936,7 @@ export default function AuthPage() {
 
       {/* Mobile Phone Display - Hidden on mobile */}
       {/* Right side visual section */}
-      <div className="hidden lg:block flex-1 relative overflow-hidden">
+      <div className="hidden lg:block flex-1 relative z-[3] overflow-hidden">
         {/* ✅ Fixed logo at the top-right */}
         <div className="fixed top-8 right-20 flex items-center gap-2 z-50">
           <img
@@ -929,11 +944,11 @@ export default function AuthPage() {
             alt="Trend Logo"
             className="h-10 w-10 object-contain"
           />
-          <span className="text-white text-3xl font-semibold">Trend</span>
+          <span className="text-black text-3xl font-semibold">Trend</span>
         </div>
 
         {/* ✅ Fixed-position phone image */}
-        <div className="fixed right-0 bottom-0 w-[45%] max-w-[500px] h-auto z-40">
+        <div className="fixed right-0 bottom-0 w-[40%] h-auto z-40">
           <img
             src="/images/auth2.png"
             alt="Trend Mobile App"

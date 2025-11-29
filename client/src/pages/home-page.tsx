@@ -121,7 +121,7 @@ export default function HomePage() {
       <main className="container max-w-6xl mx-auto px-4 py-2 ">
         <section className="flex flex-col items-start justify-between mb-4 sm:hidden">
           <div>
-            <h1 className="text-2xl font text-gray-900">Welcome to Trend</h1>
+            <h1 className="text-2xl font-[600] text-gray-900 ">Welcome to Trend</h1>
           </div>
         </section>
 
@@ -148,21 +148,21 @@ export default function HomePage() {
 
         {/* Global App Sentiment + Referral in one row */}
         <section className="mb-8">
-         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div className="md:col-span-3">
+         <div className="grid grid-cols-3 gap-5">
+          <div className="col-span-3">
             <MiniLeaderboard />
           </div>
-          <div className="md:col-span-2">
+          <div className="lg:col-span-2 col-span-3">
             <GlobalSentimentCard />
           </div>
-          <div className="md:col-span-1">
+          <div className="lg:col-span-1 col-span-3">
             <PredictionHistory />
           </div>
           
-          <div className="md:col-span-3 ">
+          <div className="col-span-3 ">
             <PublicFeed />
           </div>
-          <div className="md:col-span-3  grid grid-cols-1  gap-5">
+          <div className="col-span-3  grid grid-cols-1  gap-5">
              <ReferralCard />
           </div>
 

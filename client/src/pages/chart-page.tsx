@@ -25,9 +25,9 @@ export default function ChartPage() {
           {/* Back Button */}
           <button
             onClick={handleBack}
-            className="flex items-center justify-center w-9 h-9 rounded-full bg-[#1E1F25] hover:bg-[#23272b] transition"
+            className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-200 hover:bg-blue-600 group transition"
           >
-            <ArrowLeft className="h-5 w-5 text-white" />
+            <ArrowLeft className="h-5 w-5 text-black group-hover" />
           </button>
 
           {/* Title */}

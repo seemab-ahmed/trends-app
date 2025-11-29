@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import { LayoutGrid, LineChart, Trophy, User, LogOut } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
-
+import { LanguageSelectorButton } from "@/components/language-selector";
+import {  Shield, Search, ChevronDown } from "lucide-react";
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [location] = useLocation();
@@ -22,13 +23,13 @@ const Sidebar = () => {
   return (
     <aside
       className={`${
-        collapsed ? "w-[80px]" : "w-[240px]"
+        collapsed ? "w-[80px]" : "w-[256px]"
       } transition-all duration-300 h-screen bg-[#1F2A40] text-gray-300 flex flex-col justify-between py-6 pl-4`}
     >
       <div>
         {/* Logo + Toggle */}
-        <div className="ml-4 flex items-center gap-2 mb-8 relative">
-          {!collapsed && (
+        <div className="flex items-center gap-2 mb-8 relative">
+          {/* {!collapsed && (
             <>
               <img
                 src="/images/trend-logo.png"
@@ -37,19 +38,19 @@ const Sidebar = () => {
               />
               <h1 className="text-white font-bold text-2xl">Trend</h1>
             </>
-          )}
+          )} */}
 
-                      {/* <img
+             <img
               src="/images/trend-logo.png"
               alt="Trend Logo"
               className="w-8 h-8"
             />
-            {!collapsed && <h1 className="text-white font-bold text-2xl">Trend</h1>} */}
+            {!collapsed && <h1 className="text-white font-bold text-2xl">Trend</h1>} 
 
           {/* Toggle Button */}
           <button
             onClick={() => setCollapsed(!collapsed)}
-            className="absolute right-[10px] top-[-10px] bottom-0 m-auto"
+            className="absolute right-[8px] top-[-15px]  bottom-0 m-0 h-fit m-auto md:block hidden "
           >
             {collapsed ? (
               <svg
@@ -81,6 +82,12 @@ const Sidebar = () => {
 
         {/* Nav Items */}
         <nav className="flex flex-col gap-1">
+          {/* Mobile search */}
+          <div className=" block md:hidden rounded-l-xl hover:bg-white overflow-hidden px-6 py-3">
+            <button className="h-9 w-9 rounded-full flex items-center justify-center bg-gray-100 border border-gray-200 hover:bg-gray-200 transition">
+              <Search className="h-4 w-4 text-gray-400" />
+            </button>
+          </div>
           <Link href="/">
             <button className={btnClass("/")}>
               <LayoutGrid size={18} />
@@ -106,6 +113,8 @@ const Sidebar = () => {
 
       {/* Bottom */}
       <div className="flex flex-col gap-2">
+        <div className="block md:hidden rounded-l-xl hover:bg-white overflow-hidden "><LanguageSelectorButton /></div>
+
         <Link href="/profile">
           <button className={btnClass("/profile")}>
             <User size={18} />
@@ -117,7 +126,7 @@ const Sidebar = () => {
           onClick={() => logoutMutation.mutate()}
           className={`flex items-center gap-3 w-full ${
             collapsed ? "px-2 justify-center" : "px-6"
-          } py-3 rounded-l-xl hover:bg-white  hover:text-black hover:text-white transition`}
+          } py-3 rounded-l-xl hover:bg-white  hover:text-black text-white transition`}
         >
           <LogOut size={18} />
           {!collapsed && <span>Logout</span>}

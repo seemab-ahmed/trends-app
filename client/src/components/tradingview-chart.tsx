@@ -160,7 +160,7 @@ export default function TradingViewChart({
   return (
     <div className={`p-4  rounded-2xl bg-white  shadow-[0_0_10px_rgba(0,0,0,0.15)] ${className}`}>
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
+      <div className="flex flex-col sm:flex-row gap-3 justify-between items-start sm:items-center mb-4">
         <div>
           <h2 className="text-lg font-semibold text-black">Advanced Chart</h2>
           <p className="text-sm text-gray-400">
@@ -175,11 +175,11 @@ export default function TradingViewChart({
           size="sm"
           onClick={handleRefresh}
           disabled={isLoading}
-          className="text-white bg-[#2B2E34] hover:bg-[#3A3F46] border border-[#2B2E34] rounded-lg"
+          className="text-black hover:text-white  bg-gray-300 hover:bg-blue-600 transition-all duration-500 ease-in-out rounded-lg"
         >
           <RefreshCw
             className={`h-4 w-4 mr-2 ${
-              isLoading ? "animate-spin text-blue-400" : "text-gray-300"
+              isLoading ? "animate-spin text-white" : "text-black hover:text-white   transition-all duration-500 ease-in-out "
             }`}
           />
           <span className="text-sm font-medium">Refresh</span>
@@ -237,7 +237,7 @@ export default function TradingViewChart({
                 variant="ghost"
                 size="sm"
                 onClick={() => handleQuickSymbol(sym)}
-                className="text-xs h-7 px-3 text-gray-300 bg-[#2B2E34] hover:bg-[#3A3F46] border border-[#2B2E34] rounded-lg transition-all"
+                className="text-xs h-7 px-3 text-black hover:text-white bg-gray-300 hover:bg-blue-600 transition-all duration-500 ease-in-outrounded-lg transition-all"
               >
                 {sym}
               </Button>
