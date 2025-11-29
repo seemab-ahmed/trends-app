@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+/* slectbox */
+select option:hover {
+  background-color: #e5e7eb !important; 
+  color: #000;
+}
+
+/* Selected option highlight */
+select option:checked {
+  background-color: #e5e7eb !important; 
+  color: #000;
+}
+
+/* Custom scrollbar styles for horizontal scrolling */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground)) hsl(var(--muted));
+}
+
+/* Hide scrollbar for Chrome, Safari, Edge */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* Hide scrollbar for Firefox */
+.no-scrollbar {
+  scrollbar-width: none !important;
+}
+.scrollbar-thin::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--foreground));
+}
+
+/* Smooth scrolling for horizontal scroll */
+.overflow-x-auto {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar on mobile devices */
+@media (max-width: 768px) {
+  .scrollbar-thin::-webkit-scrollbar {
+    height: 4px;
+  }
+}
+
+:root {
+  --background: 249 250 251;
+  --foreground: 17 24 39;
+  --muted: 243 244 246;
+  --muted-foreground: 107 114 128;
+  --popover: 255 255 255;
+  --popover-foreground: 17 24 39;
+  --card: 255 255 255;
+  --card-foreground: 17 24 39;
+  --border: 229 231 235;
+  --input: 229 231 235;
+  --primary: 59 130 246;
+  --primary-foreground: 255 255 255;
+  --secondary: 243 244 246;
+  --secondary-foreground: 17 24 39;
+  --accent: 243 244 246;
+  --accent-foreground: 17 24 39;
+  --destructive: 239 68 68;
+  --destructive-foreground: 255 255 255;
+  --ring: 59 130 246;
+  --radius: 0.5rem;
+
+  /* Sentiment colors */
+  --positive: 34 197 94;
+  --neutral: 148 163 184;
+  --negative: 239 68 68;
+
+  /* Chart colors - blue theme */
+  --chart-1: 59 130 246;
+  --chart-2: 34 197 94;
+  --chart-3: 148 163 184;
+  --chart-4: 239 68 68;
+  --chart-5: 234 179 8;
+}
+
+.dark {
+  --background: 17 24 39;
+  --foreground: 249 250 251;
+  --muted: 31 41 55;
+  --muted-foreground: 156 163 175;
+  --popover: 31 41 55;
+  --popover-foreground: 249 250 251;
+  --card: 31 41 55;
+  --card-foreground: 249 250 251;
+  --border: 55 65 81;
+  --input: 55 65 81;
+  --primary: 59 130 246;
+  --primary-foreground: 255 255 255;
+  --secondary: 55 65 81;
+  --secondary-foreground: 249 250 251;
+  --accent: 55 65 81;
+  --accent-foreground: 249 250 251;
+  --destructive: 239 68 68;
+  --destructive-foreground: 249 250 251;
+  --ring: 156 163 175;
+  --radius: 0.5rem;
+
+  /* Sentiment colors - dark mode */
+  --positive: 34 197 94;
+  --neutral: 148 163 184;
+  --negative: 239 68 68;
+
+  /* Chart colors - dark mode */
+  --chart-1: 59 130 246;
+  --chart-2: 34 197 94;
+  --chart-3: 148 163 184;
+  --chart-4: 239 68 68;
+  --chart-5: 234 179 8;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+.sentiment-positive {
+  @apply bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100;
+}
+
+.sentiment-neutral {
+  @apply bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100;
+}
+
+.sentiment-negative {
+  @apply bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100;
+}
+/* === Vertical dark scrollbar for sentiment card === */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #fff #000;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #1e1f25;
+  border-radius: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #33334f;
+  border-radius: 8px;
+  border: 1px solid #1e1f25;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #4b4b6b;
+}
+
+/* Optional scroll fade shadow */
+.scroll-fade {
+  position: relative;
+}
+
+.scroll-fade::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(30, 31, 37, 1), rgba(30, 31, 37, 0));
+}
