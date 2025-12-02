@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Image } from "lucide-react";
 import Authbg  from "../../public/images/auth-bg.png"
+import { Link } from "wouter";
 import {
   Card,
   CardContent,
@@ -938,6 +939,7 @@ export default function AuthPage() {
       {/* Right side visual section */}
       <div className="hidden lg:block flex-1 relative z-[3] overflow-hidden">
         {/* ✅ Fixed logo at the top-right */}
+        <Link href="/">
         <div className="fixed top-8 right-20 flex items-center gap-2 z-50">
           <img
             src="/images/trend-logo.png"
@@ -946,6 +948,7 @@ export default function AuthPage() {
           />
           <span className="text-black text-3xl font-semibold">Trend</span>
         </div>
+        </Link>
 
         {/* ✅ Fixed-position phone image */}
         <div className="fixed right-0 bottom-0 w-[40%] h-auto z-40">

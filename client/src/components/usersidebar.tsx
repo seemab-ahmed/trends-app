@@ -82,12 +82,6 @@ const Sidebar = () => {
 
         {/* Nav Items */}
         <nav className="flex flex-col gap-1">
-          {/* Mobile search */}
-          <div className=" block md:hidden rounded-l-xl hover:bg-white overflow-hidden px-6 py-3">
-            <button className="h-9 w-9 rounded-full flex items-center justify-center bg-gray-100 border border-gray-200 hover:bg-gray-200 transition">
-              <Search className="h-4 w-4 text-gray-400" />
-            </button>
-          </div>
           <Link href="/">
             <button className={btnClass("/")}>
               <LayoutGrid size={18} />

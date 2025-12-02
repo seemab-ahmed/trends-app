@@ -81,7 +81,7 @@ export default function MiniLeaderboard() {
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="px-3 py-6 shadow-[0_0_10px_rgba(0,0,0,0.15)] grid rounded-[10px] xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-4 ">
+      <CardContent className="md:px-3 px-0 py-6 md:shadow-[0_0_10px_rgba(0,0,0,0.15)] grid rounded-[10px] xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-4 ">
         {/* --- Leaderboard --- */}
         {isLoading ? (
           <div className="text-xs text-neutral-400">Loading...</div>
