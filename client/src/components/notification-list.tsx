@@ -117,7 +117,7 @@ export function NotificationList() {
       case 'leaderboard_update':
         return <Trophy className="h-5 w-5 text-green-500" />;
       default:
-        return <Bell className="h-5 w-5 text-gray-500" />;
+        return <Bell className="h-5 w-5 text-black-500" />;
     }
   };
 
@@ -137,7 +137,7 @@ export function NotificationList() {
   if (isLoading) {
     return (
       <div className="p-4 flex items-center justify-center">
-        <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+        <Loader2 className="h-6 w-6 animate-spin text-muted-black" />
       </div>
     );
   }
@@ -145,9 +145,9 @@ export function NotificationList() {
   if (!notifications || notifications.length === 0) {
     return (
       <div className="p-8 text-center">
-        <Bell className="h-12 w-12 mx-auto mb-3 text-muted-foreground/50" />
-        <p className="text-sm text-muted-foreground">No notifications yet</p>
-        <p className="text-xs text-muted-foreground mt-1">
+        <Bell className="h-12 w-12 mx-auto mb-3 text-balck" />
+        <p className="text-sm text-muted-black">No notifications yet</p>
+        <p className="text-xs text-black mt-1">
           You'll be notified when users you follow make predictions
         </p>
       </div>
@@ -192,10 +192,10 @@ export function NotificationList() {
                     <p className="text-sm font-medium text-foreground mb-1">
                       {notification.title}
                     </p>
-                    <p className="text-sm text-muted-foreground mb-2">
+                    <p className="text-sm text-muted-black mb-2">
                       {notification.message}
                     </p>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-muted-black">
                       {formatDistanceToNow(new Date(notification.createdAt), { addSuffix: true })}
                     </p>
                   </div>
@@ -242,7 +242,7 @@ export function NotificationList() {
             <>
               {unreadNotifications.length > 0 && (
                 <div className="px-4 py-2 bg-muted/30">
-                  <p className="text-xs text-muted-foreground font-medium">Earlier</p>
+                  <p className="text-xs text-muted-black font-medium">Earlier</p>
                 </div>
               )}
               {readNotifications.map((notification) => {
@@ -258,10 +258,10 @@ export function NotificationList() {
                         <p className="text-sm font-medium text-foreground mb-1">
                           {notification.title}
                         </p>
-                        <p className="text-sm text-muted-foreground mb-2">
+                        <p className="text-sm text-muted-black mb-2">
                           {notification.message}
                         </p>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-xs text-muted-black">
                           {formatDistanceToNow(new Date(notification.createdAt), { addSuffix: true })}
                         </p>
                       </div>

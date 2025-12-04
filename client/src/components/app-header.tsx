@@ -344,14 +344,14 @@ export default function AppHeader() {
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center space-x-3 bg-transparent rounded-md px-2 py-1 hover:bg-gray-100 transition-colors">
+                <button className="flex items-center space-x-3 bg-transparent group rounded-md px-2 py-1  border border-gray-300 transition-colors">
                   <Avatar className="h-8 w-8 rounded">
                     <AvatarFallback className="bg-blue-600 text-white font-semibold">
                       {user.username.charAt(0).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
                   <div className="hidden sm:flex flex-col items-start leading-tight min-w-[120px]">
-                    <span className="text-sm font-medium text-gray-900">
+                    <span className="text-sm font-medium text-gray-900 ">
                       {user.username}
                     </span>
                   </div>

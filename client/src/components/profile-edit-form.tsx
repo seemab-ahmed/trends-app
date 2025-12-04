@@ -78,13 +78,13 @@ export default function ProfileEditForm({
   };
 
   return (
-    <Card className="bg-[#1E1F25] border border-[#2C2F36] text-white shadow-lg rounded-2xl">
+    <Card className="bg-white border border-white text-black shadow-lg rounded-2xl">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-white">
-          <Edit className="h-5 w-5 text-[#2563EB]" />
+        <CardTitle className="flex items-center gap-2 text-black">
+          <Edit className="h-5 w-5 text-gray-500" />
           Edit Profile
         </CardTitle>
-        <CardDescription className="text-gray-400">
+        <CardDescription className="text-gray-500">
           Update your profile information
         </CardDescription>
       </CardHeader>
@@ -104,7 +104,7 @@ export default function ProfileEditForm({
               placeholder="Tell us about yourself..."
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-              className="mt-1 w-full bg-[#23272b] border border-[#2C2F36] text-white placeholder:text-[#2f343a] focus:ring-1 focus:ring-[#2563EB] focus:border-[#2563EB] rounded-lg resize-none"
+              className="mt-1 w-full bg-white border border-[#2C2F36] text-black placeholder:text-gray-400 outline-none focus:ring-1 focus:ring-[#2563EB] focus:border-[#2563EB] rounded-lg resize-none"
               rows={3}
               maxLength={500}
             />

@@ -124,32 +124,32 @@ export default function PredictionPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#2f343a] text-gray-100 font-poppins">
-      <main className="container max-w-6xl mx-auto px-4 py-0 space-y-2">
+    <div className="min-h-screen bg-white text-gray-100 font-poppins">
+      <main className="container max-w-6xl mx-auto px-4 py-0 space-y-4">
         {/* Header */}
         <section className="flex items-center gap-3 mb-4 sm:hidden">
           {/* Back Button */}
           <button
             onClick={handleBack}
-            className="flex items-center justify-center w-9 h-9 rounded-full bg-[#1E1F25] hover:bg-[#23272b] transition"
+          className="flex items-center justify-center w-9 h-9 rounded-full group bg-gray-300 hover:bg-blue-600 transition"
           >
-            <ArrowLeft className="h-5 w-5 text-white" />
+            <ArrowLeft className="h-5 w-5 text-black group-hover:text-white" />
           </button>
 
           {/* Title */}
-          <h1 className="text-2xl font text-white">Make Prediction</h1>
+          <h1 className="text-2xl font text-black">Make Prediction</h1>
         </section>
 
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-lg font-semibold">
+            <h2 className="text-lg font-semibold text-black">
               {" "}
               See price and valuation for {asset.name} ({asset.symbol})
             </h2>
             {/* Show Live Price */}
             {livePriceData && (
               <div className="flex items-center gap-3 mt-2">
-                <div className="text-2xl font-bold text-white">
+                <div className="text-2xl font-bold text-gray-600">
                   $
                   {livePriceData.price?.toLocaleString(undefined, {
                     minimumFractionDigits: 2,
@@ -160,12 +160,12 @@ export default function PredictionPage() {
             )}
           </div>
           <div className="flex items-center space-x-2">
-            <Badge variant="outline" className="text-gray-300">
+            <Badge variant="outline" className="text-black border border-black">
               {asset.type}
             </Badge>
             <Badge
-              variant={asset.isActive ? "default" : "secondary"}
-              className={asset.isActive ? "bg-blue-600" : "bg-gray-600"}
+              variant={asset.isActive ? "white border " : "white "}
+              className={asset.isActive ? "bg-blue-600 border-blue-600" : "bg-gray-600 border-blue-600"}
             >
               {asset.isActive ? "Active" : "Inactive"}
             </Badge>
@@ -192,7 +192,7 @@ export default function PredictionPage() {
         {/* ---- BOTTOM ROW ---- */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left: Consensus */}
-          <div className="bg-[#1E1F25] border border-[#2C2F36] rounded-2xl shadow-sm mt-4">
+          <div className="bg-white shadow-[0_0_10px_rgba(0,0,0,0.15)] border border-0 rounded-3xl mt-4">
             {isLoadingConsensus ? (
               <Skeleton className="h-64 w-full rounded-lg" />
             ) : enhancedConsensusData ? (
@@ -203,12 +203,12 @@ export default function PredictionPage() {
                 livePriceData={livePriceData}
               />
             ) : (
-              <div className="text-gray-400">No consensus data</div>
+              <div className="text-black">No consensus data</div>
             )}
           </div>
 
           {/* Right: Prediction Form */}
-          <div className="bg-[#1E1F25] border border-[#2C2F36] rounded-2xl shadow-sm mt-4">
+          <div className="bg-white shadow-[0_0_10px_rgba(0,0,0,0.15)]  border border-0 rounded-3xl  mt-4">
             <EnhancedPredictionForm
               assetSymbol={asset.symbol}
               onSuccess={() => window.location.reload()}

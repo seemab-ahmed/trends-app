@@ -72,7 +72,7 @@ export default function EmailChangeForm() {
 
   if (isSuccess) {
     return (
-      <Card className="bg-[#1E1F25] border border-[#2C2F36] text-neutral-200 rounded-2xl shadow-md font-poppins">
+      <Card className="bg-white border border-0 shadow-[0_0_10px_rgba(0,0,0,0.15)]   text-neutral-200 rounded-2xl  font-poppins">
         <CardHeader className="text-center border-b border-[#2C2F36] pb-3">
           <div className="flex justify-center mb-2">
             <div className="h-12 w-12 rounded-full bg-[#2563EB]/10 flex items-center justify-center">
@@ -104,17 +104,17 @@ export default function EmailChangeForm() {
   }
 
   return (
-    <Card className="bg-[#1E1F25] border border-[#2C2F36] text-neutral-200 rounded-2xl shadow-md font-poppins">
-      <CardHeader className="text-center border-b border-[#2C2F36] pb-3">
+    <Card className="bg-white shadow-[0_0_10px_rgba(0,0,0,0.15)]   border border-0 text-neutral-200 rounded-2xl shadow-md font-poppins">
+      <CardHeader className="text-center border-b border-gray-300 pb-3">
         <div className="flex justify-center mb-2">
           <div className="h-12 w-12 rounded-full bg-[#2563EB]/10 flex items-center justify-center">
             <Mail className="h-6 w-6 text-[#2563EB]" />
           </div>
         </div>
-        <CardTitle className="text-lg font-semibold text-white">
+        <CardTitle className="text-lg font-semibold text-black">
           {t("email_verification.change_email_title")}
         </CardTitle>
-        <CardDescription className="text-gray-400 text-sm mt-1">
+        <CardDescription className="text-gray-600 text-sm mt-1">
           Change your email address. You will need to verify the new email
           before making predictions.
         </CardDescription>
@@ -124,7 +124,7 @@ export default function EmailChangeForm() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {/* New Email */}
           <div>
-            <Label htmlFor="newEmail" className="text-sm text-gray-300">
+            <Label htmlFor="newEmail" className="text-sm text-black">
               {t("email_verification.new_email_label")}
             </Label>
             <Input
@@ -132,9 +132,9 @@ export default function EmailChangeForm() {
               type="email"
               {...register("newEmail")}
               placeholder="Enter new email address"
-              className={`mt-1 bg-[#2A2F36] border ${
+              className={`mt-1 bg-white border ${
                 errors.newEmail ? "border-red-500" : "border-[#2C2F36]"
-              } text-gray-100 focus-visible:ring-[#2563EB]`}
+              } text-gray-600 focus-visible:ring-[#2563EB]`}
             />
             {errors.newEmail && (
               <p className="text-xs text-red-500 mt-1">
@@ -145,7 +145,7 @@ export default function EmailChangeForm() {
 
           {/* Current Password */}
           <div>
-            <Label htmlFor="currentPassword" className="text-sm text-gray-300">
+            <Label htmlFor="currentPassword" className="text-sm text-black">
               {t("email_verification.current_password_label")}
             </Label>
             <Input
@@ -153,9 +153,9 @@ export default function EmailChangeForm() {
               type="password"
               {...register("currentPassword")}
               placeholder="Enter your current password"
-              className={`mt-1 bg-[#2A2F36] border ${
+              className={`mt-1 bg-white border ${
                 errors.currentPassword ? "border-red-500" : "border-[#2C2F36]"
-              } text-gray-100 focus-visible:ring-[#2563EB]`}
+              } text-gray-600 focus-visible:ring-[#2563EB]`}
             />
             {errors.currentPassword && (
               <p className="text-xs text-red-500 mt-1">

@@ -94,7 +94,7 @@ export function MonthCountdown() {
 
   // Shared card styling
   const cardClass =
-    "bg-[#1E1F25] border border-[#2C2F36] rounded-xl shadow-sm p-5 text-gray-100 font-poppins h-full flex flex-col justify-between";
+    "rounded-3xl bg-white pt-4  border-0 shadow-[0_0_10px_rgba(0,0,0,0.15)] text-gray-100 font-poppins h-full flex flex-col justify-between";
 
   if (loading) {
     return (
@@ -102,13 +102,13 @@ export function MonthCountdown() {
         <CardContent className="flex flex-col">
           <div className="flex items-center gap-3 mb-2">
             <div className="bg-blue-600/10 p-3 rounded-full">
-              <Clock className="h-5 w-5 text-blue-500 animate-spin" />
+              <Clock className="h-5 w-5 text-black animate-spin" />
             </div>
-            <h3 className="text-sm font-medium text-gray-300">
+            <h3 className="text-sm font-medium text-black">
               Current Month Progress
             </h3>
           </div>
-          <span className="text-sm text-gray-500">Loading...</span>
+          <span className="text-sm text-balck">Loading...</span>
         </CardContent>
       </Card>
     );
@@ -122,7 +122,7 @@ export function MonthCountdown() {
             <div className="bg-blue-600/10 p-3 rounded-full">
               <Clock className="h-5 w-5 text-blue-500" />
             </div>
-            <h3 className="text-sm font-medium text-gray-300">
+            <h3 className="text-sm font-medium text-black">
               Current Month Progress
             </h3>
           </div>
@@ -142,7 +142,7 @@ export function MonthCountdown() {
             <div className="bg-blue-600/10 p-3 rounded-full">
               <Clock className="h-5 w-5 text-blue-500" />
             </div>
-            <h3 className="text-sm font-medium text-gray-300">
+            <h3 className="text-sm font-medium text-black">
               Current Month Progress
             </h3>
           </div>
@@ -161,17 +161,17 @@ export function MonthCountdown() {
             <Clock className="h-5 w-5 text-blue-500" />
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-gray-100 font-poppins">
+            <h3 className="text-sm font-semibold text-black font-poppins">
               Current Month Progress
             </h3>
-            <p className="text-[13px] font-mono text-gray-300 mt-1">
+            <p className="text-[13px] font-mono text-black mt-1">
               {formatTimeRemaining(countdown)}
             </p>
           </div>
         </div>
 
         {/* End date */}
-        <div className="mt-3 text-[12px] text-gray-300 border-[#2A2D33] font-poppins rounded-full bg-gray-700 text-center py-4">
+        <div className="mt-3 text-[12px] text-black border-gray-300 p-2 font-poppins rounded-full bg-gray-300 text-center py-4">
           Ends:{" "}
           {new Date(countdown.endDate).toLocaleDateString("en-US", {
             timeZone: "Europe/Rome",

@@ -128,7 +128,7 @@ export default function ProfilePage() {
         <tbody className="divide-y divide-[#2a2d33]">
           {predictions.map((p) => (
             <tr key={p.id} className="hover:bg-[#2a2d33]/50">
-              <td className="px-4 py-3 font-medium text-white">
+              <td className="px-4 py-3 font-medium text-black">
                 {p.asset.name}
               </td>
               <td className="px-4 py-3 capitalize text-neutral-300">
@@ -167,23 +167,23 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#2f343a]">
+    <div className="min-h-screen bg-white">
       <main className="container max-w-7xl mx-auto px-6 py-6 spa">
-        <section className="flex items-center gap-3 mb-16 sm:hidden">
+        <section className="flex items-center gap-3 mb-16 md:hidden">
           <button
             onClick={handleBack}
-            className="flex items-center justify-center w-9 h-9 rounded-full bg-[#1E1F25] hover:bg-[#23272b] transition"
+            className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-200 group hover:bg-blue-600 transition"
           >
-            <ArrowLeft className="h-5 w-5 text-white" />
+            <ArrowLeft className="h-5 w-5 text-black group-hover:text-black" />
           </button>
-          <h1 className="text-2xl font text-white">Profile</h1>
+          <h1 className="text-2xl font text-black">Profile</h1>
         </section>
-        <div className="grid grid-cols-1 md:grid-cols-[32%_1fr] gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[32%_1fr] gap-8 items-start">
           {/* ✅ LEFT PANEL */}
-          <Card className="relative rounded-2xl border-none bg-[#1E1F25] text-neutral-200 shadow-md overflow-visible font-poppins">
+          <Card className="relative  border-none rounded-3xl bg-white shadow-[0_0_10px_rgba(0,0,0,0.15)] text-black overflow-visible font-poppins">
             {/* Avatar */}
             <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
-              <div className="relative h-24 w-24 rounded-full overflow-hidden shadow-lg ring-4 ring-[#1E1F25] border-2 border-[#2f343a]">
+              <div className="relative h-24 w-24 rounded-full overflow-hidden shadow-lg ring-4 ring-blue-600 border-2 border-blue-600">
                 {userProfile?.avatar ? (
                   <img
                     src={userProfile.avatar}
@@ -191,7 +191,7 @@ export default function ProfilePage() {
                     className="h-full w-full object-cover rounded-full"
                   />
                 ) : (
-                  <div className="h-full w-full flex items-center justify-center bg-primary text-white text-3xl font-semibold rounded-full">
+                  <div className="h-full w-full flex items-center justify-center bg-blue-600 text-white text-3xl font-semibold rounded-full">
                     {user.username.charAt(0).toUpperCase()}
                   </div>
                 )}
@@ -219,35 +219,35 @@ export default function ProfilePage() {
 
               {/* Verification badge */}
               {isEmailVerified ? (
-                <div className="mt-3 mb-3 px-4 py-1 bg-[#3A3C42] rounded-full inline-block">
-                  <span className="text-green-500 text-sm font-medium">
+                <div className="mt-4 mb-4 px-4 py-1 bg-gray-200 rounded-full inline-block">
+                  <span className="text-black text-sm font-medium">
                     Email Verified
                   </span>
                 </div>
               ) : (
-                <div className="mt-3 mb-3 px-4 py-1 bg-[#3A3C42] rounded-full inline-block">
-                  <span className="text-yellow-500 text-sm font-medium">
+                <div className="mt-4 mb-4 px-4 py-1 bg-gray-200 rounded-full inline-block">
+                  <span className="text-red text-sm font-medium">
                     Email Not Verified
                   </span>
                 </div>
               )}
 
               {/* Buttons */}
-              <div className="flex justify-center gap-4">
+              <div className="flex justify-center gap-4 mt-5 flex-wrap xl:flex-nowrap">
                 <Button
                   size="sm"
                   onClick={() => setIsEditing(true)}
-                  className="w-40 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-medium rounded-md shadow-sm"
+                  className="w-40 p-1 bg-[#2563EB] !text-[12px] hover:bg-[#1D4ED8] text-white font-medium rounded-md shadow-sm"
                 >
-                  <Edit className="h-4 w-4 mr-0" /> Edit Profile
+                  <Edit className="h-4 w-4 mr-0 " /> Edit Profile
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => setShowPasswordChange(true)}
-                  className="w-40 border border-[#3A3C42] bg-transparent text-neutral-200 hover:bg-[#2C2F36] rounded-md shadow-sm"
+                  className="w-40 p-1 border !text-[12px] border-[#3A3C42] bg-transparent text-black hover:bg-blue-600 hover:text-white hover:border-blue-600 rounded-md shadow-sm"
                 >
-                  <Lock className="h-4 w-4 mr-0" /> Change Password
+                  <Lock className="h-4 w-4 mr-0 " /> Change Password
                 </Button>
               </div>
             </CardHeader>
@@ -266,13 +266,13 @@ export default function ProfilePage() {
               {/* Scores */}
               <section className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-white">Monthly Score</span>
+                  <span className="text-black">Monthly Score</span>
                   <span className="font-semibold">
                     {userProfile?.monthlyScore || 0}
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-white">Total Score</span>
+                  <span className="text-black">Total Score</span>
                   <span className="font-semibold">
                     {userProfile?.totalScore || 0}
                   </span>
@@ -282,7 +282,7 @@ export default function ProfilePage() {
               {/* Accuracy */}
               <section>
                 <div className="flex justify-between text-sm mb-2">
-                  <span className="text-white">Prediction Accuracy</span>
+                  <span className="text-black">Prediction Accuracy</span>
                   <span className="font-semibold">
                     {accuracyPercentage.toFixed(1)}%
                   </span>
@@ -295,31 +295,31 @@ export default function ProfilePage() {
               {/* Last Month Rank & Total Predictions */}
               <div className="grid grid-cols-2 gap-4 pt-3">
                 {/* Last Month Rank */}
-                <div className="flex flex-col items-center justify-center p-4 bg-[#2B2E34] rounded-xl shadow-inner">
+                <div className="flex flex-col items-center justify-center p-4 bg-gray-100 rounded-xl shadow-inner">
                   <Trophy className="h-5 w-5 mb-1 text-yellow-400" />
-                  <div className="text-xl font-bold text-white">
+                  <div className="text-xl font-bold text-black">
                     {profileLoading ? (
                       <Skeleton className="h-6 w-8" />
                     ) : (
                       userProfile?.lastMonthRank || "-"
                     )}
                   </div>
-                  <div className="text-xs text-gray-400 mt-1">
+                  <div className="text-xs text-black mt-1">
                     Last Month Rank
                   </div>
                 </div>
 
                 {/* Total Predictions */}
-                <div className="flex flex-col items-center justify-center p-4 bg-[#2B2E34] rounded-xl shadow-inner">
+                <div className="flex flex-col items-center justify-center p-4 bg-gray-100 rounded-xl shadow-inner">
                   <Activity className="h-5 w-5 mb-1 text-blue-400" />
-                  <div className="text-xl font-bold text-white">
+                  <div className="text-xl font-bold text-black">
                     {profileLoading ? (
                       <Skeleton className="h-6 w-8" />
                     ) : (
                       userProfile?.totalPredictions || 0
                     )}
                   </div>
-                  <div className="text-xs text-gray-400 mt-1">
+                  <div className="text-xs text-black mt-1">
                     Total Predictions
                   </div>
                 </div>
@@ -402,37 +402,37 @@ export default function ProfilePage() {
           </Card>
 
           {/* ✅ RIGHT PANEL */}
-          <Card className="rounded-2xl border-none bg-[#1E1F25] text-neutral-200 shadow-md h-full flex flex-col">
-            <CardHeader className="flex items-baseline pb-3 border-b border-[#2C2F36]">
-              <CardTitle className="text-lg font-semibold text-white">
+          <Card className="rounded-3xl border-0 bg-white shadow-[0_0_10px_rgba(0,0,0,0.15)] text-black h-full flex flex-col">
+            <CardHeader className="flex items-baseline pb-3 border-b border-gray-200 mb-5">
+              <CardTitle className="text-lg font-semibold text-black">
                 Latest Activity
               </CardTitle>
             </CardHeader>
 
             <CardContent className="flex-1">
               <Tabs defaultValue="all" className="w-full">
-                <TabsList className="w-full grid grid-cols-4 mb-4 bg-[#23272b] rounded-xl p-1">
+                <TabsList className="w-full grid grid-cols-4 mb-4 bg-gray-300 rounded-xl p-1 px-3">
                   <TabsTrigger
                     value="all"
-                    className="data-[state=active]:bg-[#2563EB] data-[state=active]:text-white text-sm font-medium"
+                    className="data-[state=active]:bg-[#2563EB] text-black data-[state=active]:text-white text-sm font-medium"
                   >
                     All
                   </TabsTrigger>
                   <TabsTrigger
                     value="active"
-                    className="text-sm font-medium text-neutral-400 data-[state=active]:bg-[#2563EB] data-[state=active]:text-white"
+                    className="text-sm font-medium text-black data-[state=active]:bg-[#2563EB] data-[state=active]:text-white"
                   >
                     Active
                   </TabsTrigger>
                   <TabsTrigger
                     value="evaluated"
-                    className="text-sm font-medium text-neutral-400 data-[state=active]:bg-[#2563EB] data-[state=active]:text-white"
+                    className="text-sm font-medium text-black data-[state=active]:bg-[#2563EB] data-[state=active]:text-white"
                   >
                     Evaluated
                   </TabsTrigger>
                   <TabsTrigger
                     value="correct"
-                    className="text-sm font-medium text-neutral-400 data-[state=active]:bg-[#2563EB] data-[state=active]:text-white"
+                    className="text-sm font-medium text-black data-[state=active]:bg-[#2563EB] data-[state=active]:text-white"
                   >
                     Correct
                   </TabsTrigger>
@@ -490,9 +490,9 @@ export default function ProfilePage() {
 
         {/* ✅ Followers Modal */}
         <Dialog open={showFollowers} onOpenChange={setShowFollowers}>
-          <DialogContent className="max-w-md bg-[#1E1F25] border border-[#2C2F36] text-neutral-200 rounded-xl backdrop-blur-md">
+          <DialogContent className="max-w-md bg-[#1E1F25] border border-[#2C2F36] text-black rounded-xl backdrop-blur-md">
             <DialogHeader>
-              <DialogTitle className="text-white text-lg">
+              <DialogTitle className="text-black text-lg">
                 Followers
               </DialogTitle>
             </DialogHeader>
@@ -515,16 +515,16 @@ export default function ProfilePage() {
                 ))}
               </ul>
             ) : (
-              <p className="text-sm text-neutral-400 mt-2">No followers yet</p>
+              <p className="text-sm text-black mt-2">No followers yet</p>
             )}
           </DialogContent>
         </Dialog>
 
         {/* ✅ Following Modal */}
         <Dialog open={showFollowing} onOpenChange={setShowFollowing}>
-          <DialogContent className="max-w-md bg-[#1E1F25] border border-[#2C2F36] text-neutral-200 rounded-xl backdrop-blur-md">
+          <DialogContent className="max-w-md bg-[#1E1F25] border border-[#2C2F36] text-black rounded-xl backdrop-blur-md">
             <DialogHeader>
-              <DialogTitle className="text-white text-lg">
+              <DialogTitle className="text-black text-lg">
                 Following
               </DialogTitle>
             </DialogHeader>
@@ -561,7 +561,7 @@ export default function ProfilePage() {
           onClick={() => setIsEditing(false)} // close on background click
         >
           <div
-            className="max-w-lg w-full bg-[#1E1F25] border border-[#2C2F36] text-neutral-200 rounded-xl p-6 shadow-xl font-poppins"
+            className="max-w-xl w-full bg-gray-200 border border-gray-200 text-black rounded-xl p-6 shadow-xl font-poppins"
             onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
           >
             <ProfileEditForm
@@ -579,7 +579,7 @@ export default function ProfilePage() {
           onClick={() => setShowPasswordChange(false)}
         >
           <div
-            className="max-w-md w-full bg-[#1E1F25] border border-[#2C2F36] text-neutral-200 rounded-xl p-6 shadow-xl font-poppins"
+            className="max-w-xl w-full bg-gray-300 border border-0 text-black rounded-xl p-6 shadow-xl font-poppins"
             onClick={(e) => e.stopPropagation()}
           >
             <PasswordChangeForm onCancel={() => setShowPasswordChange(false)} />
@@ -593,7 +593,7 @@ export default function ProfilePage() {
           onClick={() => setShowEmailChange(false)}
         >
           <div
-            className="max-w-md w-full bg-[#1E1F25] border border-[#2C2F36] text-neutral-200 rounded-xl p-6 shadow-xl font-poppins"
+            className="max-w-xl w-full bg-gray-300 border border-0 text-black rounded-xl p-6 shadow-xl font-poppins"
             onClick={(e) => e.stopPropagation()}
           >
             <EmailChangeForm onCancel={() => setShowEmailChange(false)} />

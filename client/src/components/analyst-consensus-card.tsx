@@ -65,10 +65,10 @@ export default function AnalystConsensusPanel({
   }
 
   return (
-    <Card className="bg-[#1E1F25] border-[#1E1F25] rounded-2xl text-white font-poppins">
+    <Card className="bg-white border-0 rounded-3xl text-white font-poppins">
       {/* Header */}
       <CardHeader className="pb-4">
-        <CardTitle className="text-lg font-semibold text-white">
+        <CardTitle className="text-lg font-semibold text-black">
           Analyst Consensus
         </CardTitle>
       </CardHeader>

@@ -113,17 +113,17 @@ export default function PasswordChangeForm({
   };
 
   return (
-    <Card className="bg-[#1E1F25] border border-[#2C2F36] text-neutral-200 rounded-2xl shadow-md">
+    <Card className="bg-white border border-0 shadow-[0_0_10px_rgba(0,0,0,0.15)]  text-neutral-200 rounded-2xl shadow-md">
       <CardHeader className="pb-3 text-center border-b border-[#2C2F36]">
         <div className="flex justify-center mb-2">
           <div className="h-12 w-12 rounded-full bg-[#2563EB]/10 flex items-center justify-center">
             <Lock className="h-6 w-6 text-[#2563EB]" />
           </div>
         </div>
-        <CardTitle className="text-lg font-semibold text-white">
+        <CardTitle className="text-lg font-semibold text-black">
           Change Password
         </CardTitle>
-        <CardDescription className="text-gray-400 text-sm">
+        <CardDescription className="text-gray-500 text-sm">
           Secure your account by updating your password
         </CardDescription>
       </CardHeader>
@@ -132,7 +132,7 @@ export default function PasswordChangeForm({
         <form onSubmit={handleSubmit} className="space-y-5 font-poppins">
           {/* Current Password */}
           <div>
-            <Label htmlFor="currentPassword" className="text-sm text-gray-300">
+            <Label htmlFor="currentPassword" className="text-sm text-black">
               Current Password
             </Label>
             <div className="relative mt-1">
@@ -142,7 +142,7 @@ export default function PasswordChangeForm({
                 placeholder="Enter your current password"
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
-                className="bg-[#2A2F36] border-[#2C2F36] text-gray-100 pr-10 focus-visible:ring-[#2563EB]"
+                className="bg-white border-[#2C2F36] text-gray-300 pr-10 focus-visible:ring-[#2563EB]"
                 required
               />
               <Button
@@ -163,7 +163,7 @@ export default function PasswordChangeForm({
 
           {/* New Password */}
           <div>
-            <Label htmlFor="newPassword" className="text-sm text-gray-300">
+            <Label htmlFor="newPassword" className="text-sm text-black">
               New Password
             </Label>
             <div className="relative mt-1">
@@ -173,7 +173,7 @@ export default function PasswordChangeForm({
                 placeholder="Enter your new password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="bg-[#2A2F36] border-[#2C2F36] text-gray-100 pr-10 focus-visible:ring-[#2563EB]"
+                className="bg-white border-[#2C2F36] text-gray-300 pr-10 focus-visible:ring-[#2563EB]"
                 required
               />
               <Button
@@ -197,7 +197,7 @@ export default function PasswordChangeForm({
 
           {/* Confirm Password */}
           <div>
-            <Label htmlFor="confirmPassword" className="text-sm text-gray-300">
+            <Label htmlFor="confirmPassword" className="text-sm text-black">
               Confirm New Password
             </Label>
             <div className="relative mt-1">
@@ -207,7 +207,7 @@ export default function PasswordChangeForm({
                 placeholder="Confirm your new password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="bg-[#2A2F36] border-[#2C2F36] text-gray-100 pr-10 focus-visible:ring-[#2563EB]"
+                className="bg-white border-[#2C2F36] text-gray-300 pr-10 focus-visible:ring-[#2563EB]"
                 required
               />
               <Button
@@ -241,7 +241,7 @@ export default function PasswordChangeForm({
               variant="outline"
               onClick={onCancel}
               disabled={isSubmitting}
-              className="flex-1 border border-[#3A3C42] bg-transparent text-neutral-200 hover:bg-[#2C2F36] rounded-md shadow-sm"
+              className="flex-1 border border-[#3A3C42] bg-[#3A3C42] text-neutral-200 hover:bg-[#2C2F36] rounded-md shadow-sm"
             >
               <X className="h-4 w-4 mr-2" />
               Cancel

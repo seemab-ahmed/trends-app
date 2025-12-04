@@ -44,10 +44,10 @@ export default function CurrentMonthLeaderboard({
   const hasData = leaderboardData?.data && leaderboardData.data.length > 0;
 
   return (
-    <Card className="bg-[#1E1F25] border border-[#2C2F36] text-gray-100 font-poppins">
+    <Card className="rounded-3xl bg-white  border-0 shadow-[0_0_10px_rgba(0,0,0,0.15)]  text-gray-100 font-poppins">
       <CardHeader>
         {/* Title */}
-        <CardTitle className="flex items-center gap-2 text-white">
+        <CardTitle className="flex items-center gap-2 text-black">
           {selectedMonth === currentMonth && (
             <TrendingUp className="h-5 w-5 text-blue-500" />
           )}
@@ -61,7 +61,7 @@ export default function CurrentMonthLeaderboard({
 
         {/* Timezone and Timestamp */}
         {leaderboardData && (
-          <div className="mt-1 text-xs text-gray-500">
+          <div className="mt-1 text-xs text-black">
             <span>Timezone: {leaderboardData.timezone || "Europe/Berlin"}</span>
             {leaderboardData.timestamp && (
               <span className="ml-3">
@@ -83,7 +83,7 @@ export default function CurrentMonthLeaderboard({
 
       <CardContent>
         {isLoading ? (
-          <div className="space-y-2">
+          <div className="space-y-2  rounded-3xl shadow-[0_0_10px_rgba(0,0,0,0.15)]">
             {[...Array(10)].map((_, i) => (
               <div key={i} className="flex items-center space-x-4">
                 <Skeleton className="h-4 w-8" />
@@ -96,9 +96,9 @@ export default function CurrentMonthLeaderboard({
             ))}
           </div>
         ) : hasData ? (
-          <Table className="border-collapse w-full">
+          <Table className="border-collapse text-black w-full">
             <TableHeader>
-              <TableRow className="text-gray-100 border-b border-[#2C2F36] ">
+              <TableRow className="text-black border-b border-gray-200">
                 <TableHead>Rank</TableHead>
                 <TableHead>User</TableHead>
                 <TableHead>Score</TableHead>
@@ -112,7 +112,7 @@ export default function CurrentMonthLeaderboard({
               {leaderboardData.data.map((entry: any) => (
                 <TableRow
                   key={entry.userId}
-                  className="transition-colors border-b border-[#2C2F36] hover:bg-[#272A31]/70"
+                  className="transition-colors border-b border-gray-100 hover:bg-gray-100"
                 >
                   <TableCell>{getRankBadge(entry.rank)}</TableCell>
                   <TableCell>
@@ -152,7 +152,7 @@ export default function CurrentMonthLeaderboard({
                           <Badge
                             key={index}
                             variant="outline"
-                            className="text-xs flex items-center gap-1 border-[#3A3D44] text-gray-300"
+                            className="text-xs flex items-center gap-1 border-[#3A3D44] text-black"
                           >
                             {badge === "1st_place" && "🥇"}
                             {badge === "2nd_place" && "🥈"}
@@ -166,7 +166,7 @@ export default function CurrentMonthLeaderboard({
                           </Badge>
                         ))
                       ) : (
-                        <span className="text-gray-500">No badges</span>
+                        <span className="text-black">No badges</span>
                       )}
                     </div>
                   </TableCell>
@@ -175,7 +175,7 @@ export default function CurrentMonthLeaderboard({
             </TableBody>
           </Table>
         ) : (
-          <div className="text-center py-8 text-gray-400">
+          <div className="text-center py-8 text-gray-900">
             <strong>No leaderboard data for this month</strong>
             <div className="mt-3 text-sm">
               <p>This could be because:</p>
@@ -189,14 +189,14 @@ export default function CurrentMonthLeaderboard({
               <Button
                 variant="outline"
                 onClick={() => setSelectedMonth("previous")}
-                className="bg-[#2B2E34] border-none text-white hover:bg-[#35383F]"
+                className="bg-gray-300 border-none text-black hover:bg-blue-600 hover:text-white"
               >
                 View Previous
               </Button>
               <Button
                 variant="outline"
                 onClick={() => setSelectedMonth("current")}
-                className="bg-[#2B2E34] border-none text-white hover:bg-[#35383F]"
+                className="bg-gray-300 border-none text-black hover:bg-blue-600 hover:text-white"
               >
                 View Current
               </Button>

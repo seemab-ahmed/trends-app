@@ -129,9 +129,9 @@ export function EnhancedPredictionForm({
   ];
 
   return (
-    <Card className="bg-[#1E1F25] border border-[#2C2F36] rounded-2xl shadow-sm text-gray-200 font-poppins">
+    <Card className=" border border-0 bg-white rounded-3xl  text-gray-200 font-poppins">
       <CardHeader className="pb-4">
-        <CardTitle className="text-lg font-semibold text-white">
+        <CardTitle className="text-lg font-semibold text-black">
           Make Prediction
         </CardTitle>
       </CardHeader>
@@ -140,7 +140,7 @@ export function EnhancedPredictionForm({
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           {/* Asset Display */}
           <div className="space-y-2">
-            <div className="flex items-center bg-[#2A2D33] border border-[#3A3D45] rounded-lg px-4 py-3">
+            <div className="flex items-center bg-white border border-[#3A3D45] rounded-lg px-4 py-3">
               <Badge className="bg-blue-600 text-white text-sm px-3 py-1 rounded-md">
                 {assetSymbol?.toUpperCase()}
               </Badge>
@@ -149,7 +149,7 @@ export function EnhancedPredictionForm({
 
           {/* Duration Selection (Custom Dropdown) */}
           <div className="space-y-2 relative">
-            <Label className="text-sm text-gray-300">Duration</Label>
+            <Label className="text-sm text-black">Duration</Label>
             <button
               type="button"
               onClick={() => setDropdownOpen((prev) => !prev)}
@@ -189,7 +189,7 @@ export function EnhancedPredictionForm({
 
           {/* Direction Buttons */}
           <div className="space-y-2">
-            <Label className="text-sm text-gray-300">Direction</Label>
+            <Label className="text-sm text-black">Direction</Label>
             <div className="flex gap-3">
               <Button
                 type="button"

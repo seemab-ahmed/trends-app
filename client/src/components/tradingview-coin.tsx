@@ -158,13 +158,13 @@ export default function TradingViewChartCoin({
   };
 
   return (
-    // bg-[#1E1F25]
-    <div className={`p-4 bg-white bg-gradient-to-r from-gray-200 to-white shadow-md shadow-gray-400  rounded-2xl ${className}`}>
+    // bg-[#1E1F25] bg-gradient-to-r from-gray-200 to-white
+    <div className={`p-4 bg-white bg-white shadow-md shadow-gray-400  rounded-2xl ${className}`}>
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
         <div>
-          <h2 className="text-lg font-semibold text-white">Advanced Chart</h2>
-          <p className="text-sm text-gray-400">
+          <h2 className="text-lg font-semibold text-black">Advanced Chart</h2>
+          <p className="text-sm text-gray-700">
             Professional trading chart for {symbol} –{" "}
             {TIMEFRAMES.find((tf) => tf.value === timeframe)?.label}
           </p>
@@ -176,11 +176,11 @@ export default function TradingViewChartCoin({
           size="sm"
           onClick={handleRefresh}
           disabled={isLoading}
-          className="text-white bg-[#2B2E34] hover:bg-[#3A3F46] border border-[#2B2E34] rounded-lg"
+          className="text-white bg-blue-600 hover:bg-[#3A3F46] border border-blue-600 rounded-lg"
         >
           <RefreshCw
             className={`h-4 w-4 mr-2 ${
-              isLoading ? "animate-spin text-blue-400" : "text-gray-300"
+              isLoading ? "animate-spin text-blue-400" : "text-white"
             }`}
           />
           <span className="text-sm font-medium">Refresh</span>

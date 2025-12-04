@@ -61,9 +61,9 @@ export function NotificationBell() {
         <Button
           variant="ghost"
           size="sm"
-          className="relative bg-[#1E1F25] hover:bg-[#2A2D31] hover:text-white"
+          className="relative bg-white group hover:bg-blue-600 hover:text-white border rounded-md border-gray-300"
         >
-          <Bell className="h-5 w-5 text-gray-300" />
+          <Bell className="h-5 w-5 text-black group-hover:text-white" />
           {unreadCount > 0 && (
             <Badge
               className="absolute -top-1.5 -right-1.5 h-5 min-w-5 flex items-center justify-center p-0 text-[10px]"
@@ -78,7 +78,7 @@ export function NotificationBell() {
       {/* 🔔 Popover Content */}
       <PopoverContent
         align="end"
-        className="w-96 p-0 bg-[#1E1F25] border-none shadow-xl rounded-xl overflow-hidden text-gray-300"
+        className="w-96 p-0 bg-gray-200 border-none shadow-xl rounded-xl overflow-hidden text-black"
       >
         <div className="max-h-[420px] overflow-y-auto custom-scrollbar">
           <NotificationList />

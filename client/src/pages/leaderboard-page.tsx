@@ -122,16 +122,16 @@ export default function LeaderboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f5f5] text-black font-poppins">
+    <div className="min-h-screen bg-white text-black font-poppins">
       <div className="container mx-auto px-4 py-0 space-y-6">
         <section className="flex items-center gap-3 mb-4 sm:hidden">
           <button
             onClick={handleBack}
-            className="flex items-center justify-center w-9 h-9 rounded-full bg-[#1E1F25] hover:bg-[#23272b] transition"
+            className="flex items-center group justify-center w-9 h-9 rounded-full bg-gray-300 hover:bg-blue-600 transition"
           >
-            <ArrowLeft className="h-5 w-5 text-white" />
+            <ArrowLeft className="h-5 w-5 text-black group-hover:text-white " />
           </button>
-          <h1 className="text-2xl font text-white">Leaderboard</h1>
+          <h1 className="text-2xl font text-black">Leaderboard</h1>
         </section>
         {/* Admin toggle section */}
         {user?.role === "admin" && (
@@ -153,14 +153,14 @@ export default function LeaderboardPage() {
         {/* Top Row: Progress + Month Selector */}
         <div className="grid grid-cols-1 lg:grid-cols-8 gap-4 items-stretch">
           {/* Left: Current Month Progress */}
-          <div className="h-full flex col-span-3">
+          <div className="h-full flex lg:col-span-3">
             <div className="w-full h-full flex flex-col">
               <MonthCountdown />
             </div>
           </div>
 
           {/* Right: Month Selector */}
-          <div className="h-full flex col-span-5">
+          <div className="h-full flex lg:col-span-5">
             <div className="w-full h-full flex flex-col">
               <MonthSelector
                 selectedMonth={selectedMonth}
@@ -173,7 +173,7 @@ export default function LeaderboardPage() {
 
         {/* Middle Row: Participants Cards */}
         {leaderboardStats && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <CurrentMonthCard
               participants={leaderboardStats.currentMonth?.participants || 0}
               monthYear={
