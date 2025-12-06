@@ -195,10 +195,10 @@ export function EnhancedPredictionForm({
                 type="button"
                 variant="outline"
                 onClick={() => form.setValue("direction", "up")}
-                className={`flex-1 py-3 text-white rounded-lg text-sm font-medium transition-colors ${
+                className={`flex-1 py-3 !text-white rounded-lg text-sm font-medium transition-colors ${
                   form.watch("direction") === "up"
                     ? "bg-green-700 hover:bg-green-700 border-green-600"
-                    : "bg-green-600 hover:bg-green-700 border-green-700"
+                    : "bg-green-300 hover:bg-green-500 border-green-700"
                 }`}
               >
                 <TrendingUp className="h-4 w-4 mr-2" />
@@ -209,10 +209,10 @@ export function EnhancedPredictionForm({
                 type="button"
                 variant="outline"
                 onClick={() => form.setValue("direction", "down")}
-                className={`flex-1 py-3 text-white rounded-lg text-sm font-medium transition-colors ${
+                className={`flex-1 py-3 !text-white rounded-lg text-sm font-medium transition-colors ${
                   form.watch("direction") === "down"
                     ? "bg-red-700 hover:bg-red-700 border-red-600"
-                    : "bg-red-600 hover:bg-red-700 border-red-700"
+                    : "bg-red-300 hover:bg-red-500 border-red-700"
                 }`}
               >
                 <TrendingUp className="h-4 w-4 mr-2 rotate-180" />

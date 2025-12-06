@@ -416,7 +416,7 @@ export default function UserProfilePage() {
       : 0;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <AppHeader />
       <main className="container max-w-6xl mx-auto px-4 py-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -426,7 +426,7 @@ export default function UserProfilePage() {
               <CardHeader>
                 <div className="flex flex-col items-center text-center">
                   <Avatar className="h-24 w-24 mb-4">
-                    <AvatarFallback className="bg-primary text-3xl text-primary-foreground">
+                    <AvatarFallback className="bg-blue-500 text-3xl text-white">
                       {userProfile?.username?.charAt(0).toUpperCase() || "U"}
                     </AvatarFallback>
                   </Avatar>
@@ -486,7 +486,7 @@ export default function UserProfilePage() {
                       <FollowButton
                         userId={userProfile?.id || ""}
                         username={userProfile?.username || ""}
-                        initialFollowing={actualIsFollowing}
+                        initialFollowing={actualIsFollowing} classname="hover:bg-blue-600"
                       />
                     </div>
                   )}
@@ -576,7 +576,7 @@ export default function UserProfilePage() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center text-lg">
-                    <Trophy className="h-5 w-5 mr-2 text-yellow-500" />
+                    <Trophy className="h-5 w-5 mr-2 text-black" />
                     Achievements
                   </CardTitle>
                 </CardHeader>
@@ -590,13 +590,13 @@ export default function UserProfilePage() {
           {/* Main Content */}
           <div className="md:col-span-2 space-y-6">
             <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="grid w-full grid-cols-3">
+              <TabsList className="grid w-full grid-cols-3 bg-gray-300 ">
                 <TabsTrigger value="overview">Overview</TabsTrigger>
                 <TabsTrigger value="predictions">Predictions</TabsTrigger>
                 <TabsTrigger value="history">History</TabsTrigger>
               </TabsList>
 
-              <TabsContent value="overview" className="space-y-6">
+              <TabsContent value="overview" className="space-y-6 py-5 px-2 ">
                 {/* Stats Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <Card>

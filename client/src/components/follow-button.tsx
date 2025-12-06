@@ -164,7 +164,7 @@ export default function FollowButton({
   // Render button variant
   return (
     <Button
-      variant={isFollowing ? "default" : "outline"}
+      variant={isFollowing ? "default" : "default"}
       className={buttonSizeClass}
       onClick={toggleFollow}
       disabled={followMutation.isPending || isSelf}

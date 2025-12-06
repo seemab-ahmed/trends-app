@@ -171,10 +171,11 @@ export default function ReferralCard() {
 
         {code ? (
           <div className="space-y-2">
-            <div className="text-sm !text-black">Your code</div>
+            <div className="text-sm !text-bl">Your code</div>
             <div className="flex gap-2">
               <Input readOnly value={code} />
               <Button
+              className="bg-blue-500 text-white border border-blue-500 hover:bg-blue-600 hover:text-white"
                 variant="outline"
                 onClick={() => navigator.clipboard.writeText(code)}
                 title="Copy code"
@@ -182,10 +183,10 @@ export default function ReferralCard() {
                 <Copy className="h-4 w-4" />
               </Button>
             </div>
-            <div className="text-sm text-muted-foreground">Referral link</div>
+            <div className="text-sm text-black">Referral link</div>
             <div className="flex gap-2">
               <Input readOnly value={link} />
-              <Button onClick={copy} title="Copy link">
+              <Button onClick={copy} title="Copy link " className=" hover:bg-blue-600 hover:text-white bg-blue-500 text-white border border-blue-500">
                 <Copy className="h-4 w-4" />
               </Button>
             </div>
