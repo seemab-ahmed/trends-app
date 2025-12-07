@@ -153,7 +153,7 @@ export function EnhancedPredictionForm({
             <button
               type="button"
               onClick={() => setDropdownOpen((prev) => !prev)}
-              className="flex justify-between items-center w-full bg-[#2A2D33] border border-[#3A3D45] text-gray-200 rounded-lg h-10 text-sm px-4 hover:bg-[#34373E] transition"
+              className="flex justify-between items-center w-full bg-white border border-[#3A3D45] text-black rounded-lg h-10 text-sm px-4 hover:bg-[#f2f2f2] transition"
             >
               <span>
                 {
@@ -169,15 +169,15 @@ export function EnhancedPredictionForm({
             </button>
 
             {dropdownOpen && (
-              <div className="absolute z-10 mt-2 w-full bg-[#1E1F25] border border-[#2C2F36] rounded-lg shadow-lg">
+              <div className="absolute z-10 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg">
                 {getDurationOptions().map((option) => (
                   <div
                     key={option.value}
                     onClick={() => handleDurationChange(option.value)}
                     className={`px-4 py-2 text-sm cursor-pointer transition-colors ${
                       selectedDuration === option.value
-                        ? "bg-blue-600 text-white"
-                        : "text-gray-200 hover:bg-[#2A2D33]"
+                        ? "bg-gray-100 text-black font-medium"
+                        : "text-black hover:bg-gray-100"
                     }`}
                   >
                     {option.label}
@@ -195,10 +195,10 @@ export function EnhancedPredictionForm({
                 type="button"
                 variant="outline"
                 onClick={() => form.setValue("direction", "up")}
-                className={`flex-1 py-3 !text-white rounded-lg text-sm font-medium transition-colors ${
+                className={`flex-1 py-3 !text-white rounded-lg text-sm font-medium hover:bg-green-700 transition-colors ${
                   form.watch("direction") === "up"
-                    ? "bg-green-700 hover:bg-green-700 border-green-600"
-                    : "bg-green-300 hover:bg-green-500 border-green-700"
+                    ? "bg-green-700  border-green-600 !text-gray-500"
+                    : "bg-green-500  border-green-700"
                 }`}
               >
                 <TrendingUp className="h-4 w-4 mr-2" />
@@ -209,10 +209,10 @@ export function EnhancedPredictionForm({
                 type="button"
                 variant="outline"
                 onClick={() => form.setValue("direction", "down")}
-                className={`flex-1 py-3 !text-white rounded-lg text-sm font-medium transition-colors ${
+                className={`flex-1 py-3 !text-white rounded-lg text-sm font-medium hover:bg-red-700 transition-colors ${
                   form.watch("direction") === "down"
-                    ? "bg-red-700 hover:bg-red-700 border-red-600"
-                    : "bg-red-300 hover:bg-red-500 border-red-700"
+                    ? "bg-red-700  border-red-600 !text-gray-500"
+                    : "bg-red-500  border-red-700"
                 }`}
               >
                 <TrendingUp className="h-4 w-4 mr-2 rotate-180" />
