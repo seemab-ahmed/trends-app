@@ -1,15 +1,37 @@
 
 
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { LayoutGrid, LineChart, Trophy, User, LogOut } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
 import { LanguageSelectorButton } from "@/components/language-selector";
 import {  Shield, Search, ChevronDown } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { Badge } from "@/components/ui/badge";
+
+interface CoinCatalogEntry {
+  id: string;
+  coinId: string;
+  symbol: string;
+  name: string;
+  slug?: string;
+  marketCapRank?: number;
+  isActive: boolean;
+  logoUrl?: string;
+  type: string;
+  lastUpdated?: string;
+  createdAt?: string;
+}
+
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const { logoutMutation } = useAuth();
+   const [searchQuery, setSearchQuery] = useState("");
+    const [debouncedQuery, setDebouncedQuery] = useState("");
+    const [debounceTimer, setDebounceTimer] = useState<NodeJS.Timeout | null>(null);
+    const [showSuggestions, setShowSuggestions] = useState(false);
+    const [selectedAssetType, setSelectedAssetType] = useState<"crypto" | "stock" | "forex">("crypto");
 
   const btnClass = (path: string) =>
     `flex items-center gap-3 w-full ${
@@ -19,6 +41,58 @@ const Sidebar = () => {
         ? "bg-white text-black shadow-[0_0_10px_rgba(0,0,0,0.15)]"
         : "text-white hover:bg-white hover:text-black transition-all ease-in-out duration-300"
     }`;
+
+    const handleSearchInput = useCallback(
+        (value: string) => {
+          setSearchQuery(value);
+          setShowSuggestions(value.length > 0);
+    
+          if (debounceTimer) {
+            clearTimeout(debounceTimer);
+          }
+    
+          const timer = setTimeout(() => {
+            setDebouncedQuery(value);
+          }, 500);
+    
+          setDebounceTimer(timer);
+        },
+        [debounceTimer]
+      );
+    
+      // Unified search query
+      const { data: searchResults, isLoading: isSearching } = useQuery({
+        queryKey: ["/api/catalog/search", debouncedQuery, selectedAssetType],
+        queryFn: async () => {
+          if (!debouncedQuery || debouncedQuery.trim().length === 0) {
+            return { results: [], count: 0, priceCallsMade: 0 };
+          }
+    
+          const response = await fetch(
+            `/api/catalog/search?q=${encodeURIComponent(
+              debouncedQuery.trim()
+            )}&limit=10&type=${selectedAssetType}`
+          );
+    
+          if (!response.ok) {
+            throw new Error("Search failed");
+          }
+    
+          const data = await response.json();
+          return data;
+        },
+        enabled: debouncedQuery.length > 0,
+        retry: 1,
+      });
+    
+      const clearSearch = () => {
+        setSearchQuery("");
+        setDebouncedQuery("");
+        setShowSuggestions(false);
+        if (debounceTimer) {
+          clearTimeout(debounceTimer);
+        }
+      };
 
   return (
     <aside
@@ -82,6 +156,172 @@ const Sidebar = () => {
 
         {/* Nav Items */}
         <nav className="flex flex-col gap-1">
+          {/* searchbar mobile */}
+
+          <div className="flex-1 relative md:hidden">
+                      <span className="absolute inset-y-0 left-3 flex items-center pointer-events-none z-10">
+                        <Search className="h-4 w-4 text-gray-400" />
+                      </span>
+                      <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => handleSearchInput(e.target.value)}
+                        placeholder={
+                          selectedAssetType === "crypto"
+                            ? "Search Bitcoin, Ethereum, etc..."
+                            : selectedAssetType === "stock"
+                            ? "Search Apple, Tesla, etc..."
+                            : "Search EUR/USD, GBP/USD, etc..."
+                        }
+                        className="w-full bg-gray-50 text-gray-900 placeholder:text-gray-500 rounded-l-lg h-10 pl-10 pr-4 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        onFocus={() => setShowSuggestions(searchQuery.length > 0)}
+                      />
+          
+                      {/* Search Results Dropdown */}
+                      {showSuggestions && (
+                        <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto">
+                          {isSearching ? (
+                            <div className="p-4">
+                              <div className="text-gray-500 text-sm mb-3">
+                                Searching...
+                              </div>
+                              <div className="space-y-2">
+                                {[...Array(3)].map((_, i) => (
+                                  <div
+                                    key={i}
+                                    className="flex items-center space-x-3 p-3"
+                                  >
+                                    <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse"></div>
+                                    <div className="flex-1">
+                                      <div className="h-4 bg-gray-200 rounded animate-pulse mb-1"></div>
+                                      <div className="h-3 bg-gray-200 rounded w-1/2 animate-pulse"></div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          ) : searchResults?.results &&
+                            searchResults.results.length > 0 ? (
+                            <div className="p-2">
+                              <div className="text-gray-500 text-xs mb-2 px-3 py-2">
+                                Found {searchResults.results.length}{" "}
+                                {selectedAssetType} assets
+                              </div>
+                              {searchResults.results.map(
+                                (asset: CoinCatalogEntry) => (
+                                  <div
+                                    key={asset.id}
+                                    className="block p-3 hover:bg-blue-50 rounded-lg transition-colors cursor-pointer"
+                                    onClick={async () => {
+                                      try {
+                                        const decodedId = decodeURIComponent(
+                                          asset.coinId
+                                        );
+                                        const encodedId =
+                                          encodeURIComponent(decodedId);
+          
+                                        const priceResponse = await fetch(
+                                          `/api/catalog/price/${encodedId}`
+                                        );
+          
+                                        if (priceResponse.ok) {
+                                          const priceData =
+                                            await priceResponse.json();
+                                          console.log(
+                                            `✅ Live price for ${asset.symbol}: $${priceData.price}`
+                                          );
+                                        }
+          
+                                        setShowSuggestions(false);
+                                        setSearchQuery("");
+                                        setLocation(`/predict/${encodedId}`);
+                                      } catch (error) {
+                                        console.error(
+                                          `❌ Error fetching price for ${asset.symbol}:`,
+                                          error
+                                        );
+                                        setShowSuggestions(false);
+                                        setSearchQuery("");
+                                        setLocation(
+                                          `/predict/${encodeURIComponent(
+                                            asset.coinId
+                                          )}`
+                                        );
+                                      }
+                                    }}
+                                  >
+                                    <div className="flex items-center space-x-3">
+                                      {asset.logoUrl ? (
+                                        <img
+                                          src={asset.logoUrl}
+                                          alt={asset.name}
+                                          className="w-8 h-8 rounded-full"
+                                        />
+                                      ) : (
+                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                                          selectedAssetType === "crypto"
+                                            ? "bg-yellow-500"
+                                            : selectedAssetType === "stock"
+                                            ? "bg-blue-500"
+                                            : "bg-green-500"
+                                        }`}>
+                                          <span className="text-white font-bold text-xs">
+                                            {selectedAssetType === "crypto"
+                                              ? "₿"
+                                              : selectedAssetType === "stock"
+                                              ? "📈"
+                                              : "💱"}
+                                          </span>
+                                        </div>
+                                      )}
+                                      <div className="flex-1">
+                                        <div className="text-gray-900 text-sm font-medium">
+                                          {asset.name}
+                                        </div>
+                                        <div className="text-gray-500 text-xs flex items-center gap-2">
+                                          <span>{asset.symbol}</span>
+                                          {asset.marketCapRank && (
+                                            <span className={
+                                              selectedAssetType === "crypto"
+                                                ? "text-yellow-600"
+                                                : selectedAssetType === "stock"
+                                                ? "text-blue-600"
+                                                : "text-green-600"
+                                            }>
+                                              #{asset.marketCapRank}
+                                            </span>
+                                          )}
+                                        </div>
+                                      </div>
+                                      <Badge
+                                        variant="outline"
+                                        className={`text-xs ${
+                                          selectedAssetType === "crypto"
+                                            ? "border-yellow-500 text-yellow-700 bg-yellow-50"
+                                            : selectedAssetType === "stock"
+                                            ? "border-blue-500 text-blue-700 bg-blue-50"
+                                            : "border-green-500 text-green-700 bg-green-50"
+                                        }`}
+                                      >
+                                        {selectedAssetType.charAt(0).toUpperCase() +
+                                          selectedAssetType.slice(1)}
+                                      </Badge>
+                                    </div>
+                                  </div>
+                                )
+                              )}
+                            </div>
+                          ) : debouncedQuery &&
+                            searchResults?.results?.length === 0 ? (
+                            <div className="p-4 text-center text-gray-500 text-sm">
+                              No {selectedAssetType} assets found for "
+                              {debouncedQuery}"
+                            </div>
+                          ) : null}
+                        </div>
+                      )}
+          </div>
+
           <Link href="/">
             <button className={btnClass("/")}>
               <LayoutGrid size={18} />

@@ -7,6 +7,7 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
+
 interface UserLayoutProps {
   children: React.ReactNode;
 }
