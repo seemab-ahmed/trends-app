@@ -56,7 +56,7 @@ const UserLayout: React.FC<UserLayoutProps> = ({ children }) => {
           {/* Left: Logo */}
           <div className="flex items-center gap-3">
             <img
-              src="/images/trend-logo.png"
+              src="/images/trend-logo2.svg"
               alt="Trend Logo"
               className="h-9 w-9 object-contain"
             />
