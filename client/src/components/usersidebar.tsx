@@ -7,6 +7,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { LanguageSelectorButton } from "@/components/language-selector";
 import { Badge } from "@/components/ui/badge";
 import { useQuery } from "@tanstack/react-query";
+import { NotificationBell } from "@/components/notification-bell";
 
 interface CoinCatalogEntry {
   id: string;
@@ -27,7 +28,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ isMobile = false }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [location, setLocation] = useLocation();
-  const { logoutMutation } = useAuth();
+  const { user, logoutMutation } = useAuth();
 
   // Search state
   const [searchQuery, setSearchQuery] = useState("");
@@ -97,7 +98,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isMobile = false }) => {
         ? "bg-white text-black shadow-[0_0_10px_rgba(0,0,0,0.15)]"
         : "text-white hover:bg-white hover:text-black transition-all ease-in-out duration-300"
     }`;
-
+ 
   return (
     <aside
       className={`${
@@ -125,6 +126,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isMobile = false }) => {
             />
             {!collapsed && <h1 className="text-white font-bold text-2xl">Trend</h1>} 
 
+          <div className="md:hidden block ml-auto pr-3">
+            {user && <NotificationBell />}
+          </div>
           {/* Toggle Button */}
           <button
             onClick={() => setCollapsed(!collapsed)}

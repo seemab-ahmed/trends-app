@@ -74,48 +74,7 @@ export default function MonthSelector({
           </div>
 
           {/* Second select: Previous Month */}
-          <div className="flex items-center gap-3">
-            <div className="bg-gray-300 p-3 rounded-full flex items-center justify-center">
-              <Calendar className="h-4 w-4 text-black" />
-            </div>
-            <Select
-              value={selectedMonth}
-              onValueChange={(value) => setSelectedMonth(value)}
-            >
-              <SelectTrigger className="relative w-64 bg-gray-300 text-black border-0 rounded-full h-10 text-sm font-medium focus:ring-0 focus:ring-offset-0">
-                <SelectValue
-                  placeholder="Previous Month"
-                  className="text-black data-[placeholder]:text-black placeholder:text-black"
-                />
-                {/* Custom white arrow */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="white"
-                  className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-black"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 9l6 6 6-6"
-                  />
-                </svg>
-              </SelectTrigger>
-              <SelectContent className="bg-gray-300 text-black border-0 rounded-md">
-                {getAvailableMonths().map((month) => (
-                  <SelectItem
-                    key={month.value}
-                    value={month.value}
-                    className="hover:bg-gray-400 cursor-pointer"
-                  >
-                    {month.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+         
         </div>
 
         {/* Right Side: Current Month Button */}
@@ -132,3 +91,49 @@ export default function MonthSelector({
     </div>
   );
 }
+
+
+
+
+//  <div className="flex items-center gap-3">
+//             <div className="bg-gray-300 p-3 rounded-full flex items-center justify-center">
+//               <Calendar className="h-4 w-4 text-black" />
+//             </div>
+//             <Select
+//               value={selectedMonth}
+//               onValueChange={(value) => setSelectedMonth(value)}
+//             >
+//               <SelectTrigger className="relative w-64 bg-gray-300 text-black border-0 rounded-full h-10 text-sm font-medium focus:ring-0 focus:ring-offset-0">
+//                 <SelectValue
+//                   placeholder="Previous Month"
+//                   className="text-black data-[placeholder]:text-black placeholder:text-black"
+//                 />
+//                 {/* Custom white arrow */}
+//                 <svg
+//                   xmlns="http://www.w3.org/2000/svg"
+//                   fill="none"
+//                   viewBox="0 0 24 24"
+//                   strokeWidth={2}
+//                   stroke="white"
+//                   className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-black"
+//                 >
+//                   <path
+//                     strokeLinecap="round"
+//                     strokeLinejoin="round"
+//                     d="M6 9l6 6 6-6"
+//                   />
+//                 </svg>
+//               </SelectTrigger>
+//               <SelectContent className="bg-gray-300 text-black border-0 rounded-md">
+//                 {getAvailableMonths().map((month) => (
+//                   <SelectItem
+//                     key={month.value}
+//                     value={month.value}
+//                     className="hover:bg-gray-400 cursor-pointer"
+//                   >
+//                     {month.label}
+//                   </SelectItem>
+//                 ))}
+//               </SelectContent>
+//             </Select>
+//           </div>
