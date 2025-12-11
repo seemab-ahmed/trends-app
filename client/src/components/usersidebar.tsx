@@ -120,7 +120,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isMobile = false }) => {
           )} */}
 
              <img
-              src="/images/trend-logo2.svg"
+              src="/images/trend-logo.png"
               alt="Trend Logo"
               className="w-8 h-8"
             />

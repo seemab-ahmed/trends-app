@@ -276,7 +276,7 @@ export default function AuthPage() {
           
           <div className=" flex items-center gap-2 absolute top-2 right-2 lg:hidden block">
           <img
-            src="/images/trend-logo1.svg"
+            src="/images/trend-logo.png"
             alt="Trend Logo"
             className="h-10 w-10 object-contain"
           />
@@ -942,7 +942,7 @@ export default function AuthPage() {
         <Link href="/">
         <div className="fixed top-8 right-20 flex items-center gap-2 z-50">
           <img
-            src="/images/trend-logo1.svg"
+            src="/images/trend-logo.png"
             alt="Trend Logo"
             className="h-10 w-10 object-contain"
           />
