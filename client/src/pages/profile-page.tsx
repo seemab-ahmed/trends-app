@@ -127,7 +127,7 @@ export default function ProfilePage() {
         </thead>
         <tbody className="divide-y divide-[#2a2d33]">
           {predictions.map((p) => (
-            <tr key={p.id} className="hover:bg-[#2a2d33]/50">
+            <tr key={p.id} className="hover:bg-gray-200">
               <td className="px-4 py-3 font-medium text-black">
                 {p.asset.name}
               </td>
@@ -411,7 +411,7 @@ export default function ProfilePage() {
 
             <CardContent className="flex-1">
               <Tabs defaultValue="all" className="w-full">
-                <TabsList className="w-full grid grid-cols-4 mb-4 bg-gray-300 rounded-xl p-1 px-3">
+                <TabsList className="w-full grid grid-cols-4 mb-4 bg-gray-200 rounded-xl p-1 px-3">
                   <TabsTrigger
                     value="all"
                     className="data-[state=active]:bg-[#2563EB] text-black data-[state=active]:text-white text-sm font-medium"

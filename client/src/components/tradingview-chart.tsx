@@ -212,10 +212,10 @@ export default function TradingViewChart({
         <div className="sm:w-32">
           <Label className="text-black">Timeframe</Label>
           <Select value={timeframe} onValueChange={setTimeframe}>
-            <SelectTrigger className="bg-[#fff] text-black border border-[#2B2E34] mt-1">
+            <SelectTrigger className="bg-gray-100 text-black border border-[#2B2E34] mt-1">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent className="bg-[#fff] text-black border-[#2B2E34]">
+            <SelectContent className="bg-gray-100 text-black border-[#2B2E34]">
               {TIMEFRAMES.map((tf) => (
                 <SelectItem key={tf.value} value={tf.value}>
                   {tf.label}
@@ -237,7 +237,7 @@ export default function TradingViewChart({
                 variant="ghost"
                 size="sm"
                 onClick={() => handleQuickSymbol(sym)}
-                className="text-xs h-7 px-3 text-black hover:text-white bg-gray-300 hover:bg-blue-600 transition-all duration-500 ease-in-outrounded-lg transition-all"
+                className="text-xs h-7 px-3 text-black hover:text-white bg-gray-200 hover:bg-blue-600 transition-all duration-500 ease-in-outrounded-lg transition-all"
               >
                 {sym}
               </Button>

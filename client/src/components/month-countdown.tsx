@@ -171,7 +171,7 @@ export function MonthCountdown() {
         </div>
 
         {/* End date */}
-        <div className="mt-3 text-[12px] text-black border-gray-300 p-2 font-poppins rounded-full bg-gray-300 text-center py-4">
+        <div className="mt-3 text-[12px] text-black border-gray-200 p-2 font-poppins rounded-full bg-gray-200 text-center py-4">
           Ends:{" "}
           {new Date(countdown.endDate).toLocaleDateString("en-US", {
             timeZone: "Europe/Rome",

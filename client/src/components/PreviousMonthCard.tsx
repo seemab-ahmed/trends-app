@@ -18,7 +18,7 @@ export default function PreviousMonthCard({ participants, monthYear }: Props) {
       <CardContent className="px-0 pt-0">
         <div className="flex items-center justify-between">
           {/* Left: Month Box */}
-          <div className="bg-gray-300 rounded-full px-6 py-1.5 min-w-[220px] text-center">
+          <div className="bg-gray-200 rounded-full px-6 py-1.5 min-w-[220px] text-center">
             <span className="text-xs text-black font-medium tracking-wide">
               {monthYear || "2025-09"}
             </span>

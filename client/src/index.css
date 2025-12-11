@@ -76,7 +76,7 @@ select option:checked {
   --border: 229 231 235;
   --input: 229 231 235;
   --primary: 59 130 246;
-  --primary-foreground: 255 255 255;
+  --primary-foreground: 231 231 231;
   --secondary: 243 244 246;
   --secondary-foreground: 17 24 39;
   --accent: 243 244 246;
@@ -111,7 +111,7 @@ select option:checked {
   --border: 55 65 81;
   --input: 55 65 81;
   --primary: 59 130 246;
-  --primary-foreground: 255 255 255;
+  --primary-foreground: 231 231 231;
   --secondary: 55 65 81;
   --secondary-foreground: 249 250 251;
   --accent: 55 65 81;

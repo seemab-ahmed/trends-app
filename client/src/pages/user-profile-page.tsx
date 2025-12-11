@@ -34,7 +34,6 @@ import {
   Clock,
   Target,
 } from "lucide-react";
-import AppHeader from "../components/app-header";
 import FollowButton from "../components/follow-button";
 import { useAuth } from "../hooks/use-auth";
 import { getAuthToken } from "../lib/queryClient";
@@ -87,8 +86,13 @@ interface UserBadge {
   id: string;
   userId: string;
   badgeType: string;
+  badgeName: string;
+  badgeDescription: string;
   monthYear: string;
-  createdAt: Date;
+  rank?: number | null;
+  totalScore?: number | null;
+  metadata?: unknown;
+  createdAt: string;
 }
 
 interface MonthlyScore {
@@ -417,7 +421,6 @@ export default function UserProfilePage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <AppHeader />
       <main className="container max-w-6xl mx-auto px-4 py-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* User Profile Card */}
@@ -474,30 +477,15 @@ export default function UserProfilePage() {
                   {/* Follow Button */}
                   {currentUser && !isOwnProfile && (
                     <div className="flex justify-center">
-                      {console.log(
-                        "UserProfilePage: Rendering FollowButton with:",
-                        {
-                          userId: userProfile?.id,
-                          username: userProfile?.username,
-                          isFollowing: actualIsFollowing,
-                          currentUserId: currentUser?.id,
-                        }
-                      )}
                       <FollowButton
                         userId={userProfile?.id || ""}
                         username={userProfile?.username || ""}
-                        initialFollowing={actualIsFollowing} classname="hover:bg-blue-600"
+                        initialFollowing={actualIsFollowing}
                       />
                     </div>
                   )}
 
                   {/* Bio */}
-                  {console.log("UserProfilePage: Bio debug:", {
-                    userProfile: userProfile,
-                    bio: userProfile?.bio,
-                    hasBio: !!userProfile?.bio,
-                    bioLength: userProfile?.bio?.length,
-                  })}
                   {userProfile?.bio && (
                     <div>
                       <div className="text-sm font-medium mb-1">Bio</div>
@@ -590,7 +578,7 @@ export default function UserProfilePage() {
           {/* Main Content */}
           <div className="md:col-span-2 space-y-6">
             <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="grid w-full grid-cols-3 bg-gray-300 ">
+              <TabsList className="grid w-full grid-cols-3 bg-gray-200 text-black rounded-lg">
                 <TabsTrigger value="overview">Overview</TabsTrigger>
                 <TabsTrigger value="predictions">Predictions</TabsTrigger>
                 <TabsTrigger value="history">History</TabsTrigger>
@@ -788,7 +776,7 @@ function PredictionCard({ prediction }: { prediction: PredictionWithAsset }) {
     switch (status) {
       case "active":
         return (
-          <Badge variant="default" className="bg-blue-500">
+          <Badge variant="default" className="bg-blue-500 ">
             Active
           </Badge>
         );

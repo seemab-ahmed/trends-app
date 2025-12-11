@@ -189,14 +189,14 @@ export default function CurrentMonthLeaderboard({
               <Button
                 variant="outline"
                 onClick={() => setSelectedMonth("previous")}
-                className="bg-gray-300 border-none text-black hover:bg-blue-600 hover:text-white"
+                className="bg-gray-200 border-none text-black hover:bg-blue-600 hover:text-white"
               >
                 View Previous
               </Button>
               <Button
                 variant="outline"
                 onClick={() => setSelectedMonth("current")}
-                className="bg-gray-300 border-none text-black hover:bg-blue-600 hover:text-white"
+                className="bg-gray-200 border-none text-black hover:bg-blue-600 hover:text-white"
               >
                 View Current
               </Button>

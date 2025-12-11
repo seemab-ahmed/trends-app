@@ -31,14 +31,14 @@ export default function MonthSelector({
         <div className="flex flex-col gap-3 w-full sm:w-auto">
           {/* First select: Select Month */}
           <div className="flex items-center gap-3">
-            <div className="bg-gray-300 p-3 rounded-full flex items-center justify-center">
+            <div className="bg-gray-200 p-3 rounded-full flex items-center justify-center">
               <Calendar className="h-4 w-4 text-black" />
             </div>
             <Select
               value={selectedMonth}
               onValueChange={(value) => setSelectedMonth(value)}
             >
-              <SelectTrigger className="relative w-64 bg-gray-300 text-black border-0 rounded-full h-10 text-sm font-medium focus:ring-0 focus:ring-offset-0">
+              <SelectTrigger className="relative w-64 bg-gray-200 text-black border-0 rounded-full h-10 text-sm font-medium focus:ring-0 focus:ring-offset-0">
                 <SelectValue
                   placeholder="Select Month"
                   className="text-black data-[placeholder]:text-black placeholder:text-black"
@@ -59,12 +59,12 @@ export default function MonthSelector({
                   />
                 </svg>
               </SelectTrigger>
-              <SelectContent className="bg-gray-300 text-black border-0 rounded-md">
+              <SelectContent className="bg-gray-200 text-black border-0 rounded-md">
                 {getAvailableMonths().map((month) => (
                   <SelectItem
                     key={month.value}
                     value={month.value}
-                    className="hover:bg-gray-400 cursor-pointer"
+                    className="hover:bg-gray-300 cursor-pointer"
                   >
                     {month.label}
                   </SelectItem>

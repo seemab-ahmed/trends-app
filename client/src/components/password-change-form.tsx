@@ -65,7 +65,7 @@ export default function PasswordChangeForm({
         title: "Password Change Failed",
         description:
           error instanceof Error ? error.message : "Failed to change password",
-        variant: "destructive",
+        variant: "default",
       });
     },
   });
@@ -77,7 +77,7 @@ export default function PasswordChangeForm({
       toast({
         title: "Passwords Don't Match",
         description: "New password and confirm password must match.",
-        variant: "destructive",
+        variant: "default",
       });
       return;
     }
