@@ -39,6 +39,7 @@ import { useAuth } from "../hooks/use-auth";
 import { getAuthToken } from "../lib/queryClient";
 import { buildApiUrl } from "../lib/api-config";
 import BadgeDisplay from "../components/badge-display";
+import { useLanguage } from "@/hooks/use-language";
 
 interface UserProfile {
   id: string;
@@ -107,6 +108,7 @@ interface MonthlyScore {
 export default function UserProfilePage() {
   const { username } = useParams();
   const { user: currentUser } = useAuth();
+  const { t } = useLanguage();
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState("overview");
   const encodedUsername = username || "";
@@ -347,8 +349,8 @@ export default function UserProfilePage() {
         <main className="container max-w-6xl mx-auto px-4 py-6">
           <div className="text-center py-8">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-            <h2 className="text-xl font-semibold mb-2">Loading...</h2>
-            <p className="text-muted-foreground">Fetching user profile...</p>
+            <h2 className="text-xl font-semibold mb-2">{t("common.loading")}</h2>
+            <p className="text-muted-foreground">{t("user_profile.loading_profile") || "Fetching user profile..."}</p>
           </div>
         </main>
       </div>
@@ -363,9 +365,9 @@ export default function UserProfilePage() {
         <main className="container max-w-6xl mx-auto px-4 py-6">
           <div className="text-center py-8">
             <AlertTriangle className="h-12 w-12 mx-auto mb-4 text-red-500" />
-            <h2 className="text-xl font-semibold mb-2">User Not Found</h2>
+            <h2 className="text-xl font-semibold mb-2">{t("user_profile.not_found")}</h2>
             <p className="text-muted-foreground">
-              The user you're looking for doesn't exist.
+              {t("user_profile.not_found_desc")}
             </p>
             <p className="text-sm text-muted-foreground mt-2">
               Error: {profileError.message}
@@ -438,7 +440,7 @@ export default function UserProfilePage() {
                   </CardTitle>
                   <CardDescription className="flex items-center mt-1">
                     <Calendar className="h-3.5 w-3.5 mr-1" />
-                    Joined{" "}
+                    {t("user_profile.joined")}{" "}
                     {profileLoading
                       ? "..."
                       : userProfile
@@ -459,7 +461,7 @@ export default function UserProfilePage() {
                   </CardDescription>
                   {userProfile?.emailVerified && (
                     <Badge variant="outline" className="mt-2 bg-primary/10">
-                      <Check className="h-3 w-3 mr-1" /> Email Verified
+                      <Check className="h-3 w-3 mr-1" /> {t("user_profile.email_verified")}
                     </Badge>
                   )}
                   {userProfile?.role === "admin" && (
@@ -467,7 +469,7 @@ export default function UserProfilePage() {
                       variant="outline"
                       className="mt-2 bg-red-500/10 text-red-500"
                     >
-                      <Star className="h-3 w-3 mr-1" /> Admin
+                      <Star className="h-3 w-3 mr-1" /> {t("user_profile.admin")}
                     </Badge>
                   )}
                 </div>
@@ -488,7 +490,7 @@ export default function UserProfilePage() {
                   {/* Bio */}
                   {userProfile?.bio && (
                     <div>
-                      <div className="text-sm font-medium mb-1">Bio</div>
+                      <div className="text-sm font-medium mb-1">{t("user_profile.bio")}</div>
                       <div className="text-sm text-muted-foreground">
                         {userProfile.bio}
                       </div>
@@ -498,7 +500,7 @@ export default function UserProfilePage() {
                   {/* Monthly Score */}
                   <div>
                     <div className="flex justify-between items-center mb-2">
-                      <div className="text-sm font-medium">Monthly Score</div>
+                      <div className="text-sm font-medium">{t("user_profile.monthly_score")}</div>
                       <div className="text-sm font-bold">
                         {profileLoading ? (
                           <Skeleton className="h-4 w-12" />
@@ -509,15 +511,15 @@ export default function UserProfilePage() {
                     </div>
                     <div className="text-xs text-muted-foreground">
                       {userProfile?.lastMonthRank
-                        ? `Last month: Rank #${userProfile.lastMonthRank}`
-                        : "No previous rank"}
+                        ? t("user_profile.last_month_rank", { rank: userProfile.lastMonthRank })
+                        : t("user_profile.no_previous_rank")}
                     </div>
                   </div>
 
                   {/* Total Score */}
                   <div>
                     <div className="flex justify-between items-center mb-2">
-                      <div className="text-sm font-medium">Total Score</div>
+                      <div className="text-sm font-medium">{t("user_profile.total_score")}</div>
                       <div className="text-sm font-bold">
                         {profileLoading ? (
                           <Skeleton className="h-4 w-12" />
@@ -539,7 +541,7 @@ export default function UserProfilePage() {
                         )}
                       </div>
                       <div className="text-xs text-muted-foreground">
-                        Followers
+                        {t("user_profile.followers")}
                       </div>
                     </div>
                     <div className="text-center">
@@ -551,7 +553,7 @@ export default function UserProfilePage() {
                         )}
                       </div>
                       <div className="text-xs text-muted-foreground">
-                        Following
+                        {t("user_profile.following")}
                       </div>
                     </div>
                   </div>
@@ -565,11 +567,11 @@ export default function UserProfilePage() {
                 <CardHeader>
                   <CardTitle className="flex items-center text-lg">
                     <Trophy className="h-5 w-5 mr-2 text-black" />
-                    Achievements
+                    {t("user_profile.achievements")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <BadgeDisplay badges={userBadges} />
+                  <BadgeDisplay badges={userBadges as any} />
                 </CardContent>
               </Card>
             )}
@@ -579,9 +581,9 @@ export default function UserProfilePage() {
           <div className="md:col-span-2 space-y-6">
             <Tabs value={activeTab} onValueChange={setActiveTab}>
               <TabsList className="grid w-full grid-cols-3 bg-gray-200 text-black rounded-lg">
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="predictions">Predictions</TabsTrigger>
-                <TabsTrigger value="history">History</TabsTrigger>
+                <TabsTrigger value="overview">{t("user_profile.overview")}</TabsTrigger>
+                <TabsTrigger value="predictions">{t("user_profile.predictions")}</TabsTrigger>
+                <TabsTrigger value="history">{t("user_profile.history")}</TabsTrigger>
               </TabsList>
 
               <TabsContent value="overview" className="space-y-6 py-5 px-2 ">
@@ -600,7 +602,7 @@ export default function UserProfilePage() {
                             )}
                           </div>
                           <div className="text-sm text-muted-foreground">
-                            Total Predictions
+                            {t("user_profile.total_predictions")}
                           </div>
                         </div>
                       </div>
@@ -620,7 +622,7 @@ export default function UserProfilePage() {
                             )}
                           </div>
                           <div className="text-sm text-muted-foreground">
-                            Correct Predictions
+                            {t("user_profile.correct_predictions")}
                           </div>
                         </div>
                       </div>
@@ -647,7 +649,7 @@ export default function UserProfilePage() {
                             %
                           </div>
                           <div className="text-sm text-muted-foreground">
-                            Accuracy
+                            {t("user_profile.accuracy")}
                           </div>
                         </div>
                       </div>
@@ -660,7 +662,7 @@ export default function UserProfilePage() {
                   <CardHeader>
                     <CardTitle className="flex items-center">
                       <Clock className="h-5 w-5 mr-2 text-blue-500" />
-                      Active Predictions
+                      {t("user_profile.active_predictions")}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
@@ -670,14 +672,14 @@ export default function UserProfilePage() {
                           {activePredictions}
                         </div>
                         <div className="text-sm text-muted-foreground">
-                          Currently active
+                          {t("user_profile.currently_active")}
                         </div>
                       </div>
                     ) : (
                       <div className="text-center py-4">
                         <EyeOff className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
                         <p className="text-sm text-muted-foreground">
-                          Follow to view predictions
+                          {t("user_profile.follow_to_view")}
                         </p>
                       </div>
                     )}
@@ -701,7 +703,7 @@ export default function UserProfilePage() {
                       <CardContent className="text-center py-8">
                         <Target className="h-12 w-12 mx-auto mb-4 text-muted-foreground/50" />
                         <p className="text-muted-foreground">
-                          No predictions found
+                          {t("user_profile.no_predictions")}
                         </p>
                       </CardContent>
                     </Card>
@@ -711,10 +713,10 @@ export default function UserProfilePage() {
                     <CardContent className="text-center py-8">
                       <EyeOff className="h-12 w-12 mx-auto mb-4 text-muted-foreground/50" />
                       <p className="text-muted-foreground mb-2">
-                        Predictions are private
+                        {t("user_profile.predictions_private")}
                       </p>
                       <p className="text-sm text-muted-foreground">
-                        Follow this user to view their prediction history
+                        {t("user_profile.follow_to_view_history")}
                       </p>
                     </CardContent>
                   </Card>
@@ -725,7 +727,7 @@ export default function UserProfilePage() {
                 {monthlyScores && monthlyScores.length > 0 ? (
                   <Card>
                     <CardHeader>
-                      <CardTitle>Monthly Performance</CardTitle>
+                      <CardTitle>{t("user_profile.monthly_performance")}</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-3">
@@ -744,7 +746,7 @@ export default function UserProfilePage() {
                             </div>
                             <div className="text-right">
                               <div className="font-bold">
-                                {score.totalScore} pts
+                                {score.totalScore} {t("common.points_short")}
                               </div>
                             </div>
                           </div>
@@ -757,7 +759,7 @@ export default function UserProfilePage() {
                     <CardContent className="text-center py-8">
                       <Calendar className="h-12 w-12 mx-auto mb-4 text-muted-foreground/50" />
                       <p className="text-muted-foreground">
-                        No historical data available
+                        {t("user_profile.no_history")}
                       </p>
                     </CardContent>
                   </Card>
@@ -772,18 +774,20 @@ export default function UserProfilePage() {
 }
 
 function PredictionCard({ prediction }: { prediction: PredictionWithAsset }) {
+  const { t } = useLanguage();
+  
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "active":
         return (
-          <Badge variant="default" className="bg-blue-500 ">
-            Active
+          <Badge variant="default" className="bg-blue-500">
+            {t("prediction.status.active")}
           </Badge>
         );
       case "expired":
-        return <Badge variant="secondary">Expired</Badge>;
+        return <Badge variant="secondary">{t("prediction.status.expired")}</Badge>;
       case "evaluated":
-        return <Badge variant="outline">Evaluated</Badge>;
+        return <Badge variant="outline">{t("prediction.status.evaluated")}</Badge>;
       default:
         return <Badge variant="outline">{status}</Badge>;
     }
@@ -794,13 +798,13 @@ function PredictionCard({ prediction }: { prediction: PredictionWithAsset }) {
       case "correct":
         return (
           <Badge variant="default" className="bg-green-500">
-            Correct
+            {t("prediction.result.correct")}
           </Badge>
         );
       case "incorrect":
-        return <Badge variant="destructive">Incorrect</Badge>;
+        return <Badge variant="destructive">{t("prediction.result.incorrect")}</Badge>;
       case "pending":
-        return <Badge variant="secondary">Pending</Badge>;
+        return <Badge variant="secondary">{t("prediction.result.pending")}</Badge>;
       default:
         return <Badge variant="outline">{result}</Badge>;
     }
@@ -851,7 +855,7 @@ function PredictionCard({ prediction }: { prediction: PredictionWithAsset }) {
           </div>
         </div>
         <div className="mt-2 text-xs text-muted-foreground">
-          Created: {new Date(prediction.timestampCreated).toLocaleString()}
+          {t("common.created")}: {new Date(prediction.timestampCreated).toLocaleString()}
         </div>
       </CardContent>
     </Card>

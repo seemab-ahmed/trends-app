@@ -3,6 +3,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { useQuery } from "@tanstack/react-query";
 import { Redirect, useLocation } from "wouter";
 import { ArrowLeft } from "lucide-react";
+import { useLanguage } from "@/hooks/use-language";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -15,6 +16,7 @@ import CurrentMonthLeaderboard from "@/components/CurrentMonthLeaderboard";
 
 export default function LeaderboardPage() {
   const { user } = useAuth();
+  const { t } = useLanguage();
   const [_, setLocation] = useLocation();
   const [selectedMonth, setSelectedMonth] = useState<string>(
     new Date().toISOString().slice(0, 7)
@@ -70,7 +72,10 @@ export default function LeaderboardPage() {
     },
   });
 
-  const { data: leaderboardStats } = useQuery({
+  const { data: leaderboardStats } = useQuery<{
+    currentMonth?: { participants: number; monthYear: string };
+    previousMonth?: { participants: number; monthYear: string };
+  }>({
     queryKey: ["/api/leaderboard/stats"],
   });
 
@@ -131,7 +136,7 @@ export default function LeaderboardPage() {
           >
             <ArrowLeft className="h-5 w-5 text-black group-hover:text-white " />
           </button>
-          <h1 className="text-2xl font text-black">Leaderboard</h1>
+          <h1 className="text-2xl font text-black">{t("leaderboard.title")}</h1>
         </section>
         {/* Admin toggle section */}
         {user?.role === "admin" && (
@@ -142,10 +147,10 @@ export default function LeaderboardPage() {
               onCheckedChange={setIncludeAdmins}
             />
             <Label htmlFor="include-admins" className="text-sm">
-              {includeAdmins ? "Include Admins" : "Exclude Admins"}
+              {includeAdmins ? t("leaderboard.include_admins") : t("leaderboard.exclude_admins")}
             </Label>
             <Badge variant="outline" className="ml-2">
-              {includeAdmins ? "All Users" : "Regular Users Only"}
+              {includeAdmins ? t("leaderboard.all_users") : t("leaderboard.regular_users_only")}
             </Badge>
           </div>
         )}

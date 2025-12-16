@@ -164,7 +164,7 @@ export function NotificationList() {
         <h3 className="font-semibold text-lg">Notifications</h3>
         {unreadNotifications.length > 0 && (
           <Button
-            variant="ghost"
+            variant="default"
             size="sm"
             onClick={() => markAllAsReadMutation.mutate()}
             disabled={markAllAsReadMutation.isPending}
@@ -182,7 +182,7 @@ export function NotificationList() {
           {unreadNotifications.map((notification) => {
             const link = getNotificationLink(notification);
             const content = (
-              <div className={`p-4 hover:bg-muted/50 transition-colors relative group ${!notification.isRead ? 'bg-blue-50/10 border-l-2 border-l-blue-500' : ''}`}>
+              <div className={`p-4 hover:bg-gray-300 transition-colors relative group ${!notification.isRead ? 'bg-blue-50/10 border-l-2 border-l-blue-500' : ''}`}>
                 <div className="flex gap-3">
                   <div className="flex-shrink-0 mt-1">
                     {getNotificationIcon(notification.type)}
@@ -201,7 +201,7 @@ export function NotificationList() {
                   </div>
 
                   <Button
-                    variant="ghost"
+                    variant="default"
                     size="sm"
                     className="opacity-0 group-hover:opacity-100 transition-opacity h-6 w-6 p-0"
                     onClick={(e) => {
@@ -248,7 +248,7 @@ export function NotificationList() {
               {readNotifications.map((notification) => {
                 const link = getNotificationLink(notification);
                 const content = (
-                  <div className="p-4 hover:bg-muted/50 transition-colors relative group opacity-75">
+                  <div className="p-4 hover:bg-gray-100 transition-colors relative group opacity-75">
                     <div className="flex gap-3">
                       <div className="flex-shrink-0 mt-1">
                         {getNotificationIcon(notification.type)}

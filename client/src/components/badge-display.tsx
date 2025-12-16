@@ -15,6 +15,13 @@ interface BadgeDisplayProps {
   className?: string;
 }
 
+type BadgeMetadata = {
+  streakCount?: number;
+  milestone?: string | number;
+  accuracyThreshold?: number;
+  [key: string]: any;
+};
+
 type UserBadge = {
   id: string;
   userId: string;
@@ -24,7 +31,7 @@ type UserBadge = {
   monthYear: string;
   rank?: number | null;
   totalScore?: number | null;
-  metadata?: unknown;
+  metadata?: BadgeMetadata;
   createdAt: string;
 };
 
@@ -232,7 +239,7 @@ export default function BadgeDisplay({
             <TooltipProvider key={badge.id}>
               <Tooltip>
                 <TooltipTrigger>
-                  <div className={`flex items-center gap-3 p-3 rounded-lg border transition-colors hover:bg-muted/50 cursor-pointer ${getBadgeColor(badge.badgeType)}`}>
+                  <div className={`flex items-center gap-3 p-3 rounded-lg border transition-colors hover:bg-gray-100 cursor-pointer ${getBadgeColor(badge.badgeType)}`}>
                     <div className={`p-2 rounded-full bg-muted ${getBadgeColor(badge.badgeType)}`}>
                       {getBadgeIcon(badge.badgeType)}
                     </div>
@@ -265,7 +272,7 @@ export default function BadgeDisplay({
                         <p>Details:</p>
                         <ul className="list-disc list-inside">
                           {Object.entries(badge.metadata).map(([key, value]) => (
-                            <li key={key}>{key}: {value}</li>
+                            <li key={key}>{key}: {String(value)}</li>
                           ))}
                         </ul>
                       </div>

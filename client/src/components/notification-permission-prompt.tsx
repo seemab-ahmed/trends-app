@@ -54,7 +54,7 @@ export function NotificationPermissionPrompt() {
 
   return (
     <div className="fixed bottom-4 right-4 z-50 max-w-sm animate-in slide-in-from-bottom-5">
-      <Card className="shadow-lg border-2">
+      <Card className="shadow-lg">
         <CardHeader className="pb-3">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-2">
@@ -62,7 +62,7 @@ export function NotificationPermissionPrompt() {
               <CardTitle className="text-lg">Enable Notifications</CardTitle>
             </div>
             <Button
-              variant="ghost"
+              variant="default"
               size="sm"
               className="h-6 w-6 p-0"
               onClick={handleDismiss}

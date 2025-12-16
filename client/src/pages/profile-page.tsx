@@ -10,6 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { ArrowLeft } from "lucide-react";
+import { useLanguage } from "@/hooks/use-language";
 import {
   Card,
   CardContent,
@@ -39,8 +40,27 @@ import {
   Edit,
   Lock,
 } from "lucide-react";
-import { UserProfile, Prediction, UserBadge } from "@shared/schema";
+import { Prediction, UserBadge } from "@shared/schema";
 import { API_ENDPOINTS } from "@/lib/api-config";
+
+interface UserProfileResponse {
+  id: string;
+  username: string;
+  email: string;
+  createdAt: Date;
+  bio: string | null;
+  avatar: string | null;
+  monthlyScore: number;
+  totalScore: number;
+  totalPredictions: number;
+  correctPredictions: number;
+  followersCount: number;
+  followingCount: number;
+  lastMonthRank: number | null;
+  isFollowing: boolean;
+  badges: any[];
+  isOAuthUser?: boolean;
+}
 
 interface PredictionWithAsset extends Prediction {
   asset: {
@@ -51,6 +71,7 @@ interface PredictionWithAsset extends Prediction {
 }
 
 export default function ProfilePage() {
+  const { t } = useLanguage();
   const { user, profile } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [showPasswordChange, setShowPasswordChange] = useState(false);
@@ -60,7 +81,7 @@ export default function ProfilePage() {
   const [_, setLocation] = useLocation();
   const handleBack = () => setLocation("/");
   const { data: userProfile, isLoading: profileLoading } =
-    useQuery<UserProfile>({
+    useQuery<UserProfileResponse>({
       queryKey: ["/api/user/profile"],
       enabled: !!user,
     });
@@ -97,7 +118,7 @@ export default function ProfilePage() {
       : 0;
 
   const isEmailVerified = user.emailVerified;
-  function renderPredictionTable(predictions, loading) {
+  function renderPredictionTable(predictions: PredictionWithAsset[], loading: boolean) {
     if (loading) {
       return (
         <div className="py-6 text-center">
@@ -109,7 +130,7 @@ export default function ProfilePage() {
     if (!predictions || predictions.length === 0) {
       return (
         <div className="py-6 text-center text-neutral-500">
-          No predictions yet
+          {t("profile.no_predictions")}
         </div>
       );
     }
@@ -118,15 +139,15 @@ export default function ProfilePage() {
       <table className="min-w-full text-sm text-neutral-300">
         <thead className="bg-[#23272b] text-neutral-400 uppercase text-xs">
           <tr>
-            <th className="px-4 py-3 text-left font-medium">Coin</th>
-            <th className="px-4 py-3 text-left font-medium">Status</th>
-            <th className="px-4 py-3 text-left font-medium">Direction</th>
-            <th className="px-4 py-3 text-left font-medium">Result</th>
-            <th className="px-4 py-3 text-left font-medium">Date</th>
+            <th className="px-4 py-3 text-left font-medium">{t("profile.coin")}</th>
+            <th className="px-4 py-3 text-left font-medium">{t("profile.status")}</th>
+            <th className="px-4 py-3 text-left font-medium">{t("profile.direction")}</th>
+            <th className="px-4 py-3 text-left font-medium">{t("profile.result")}</th>
+            <th className="px-4 py-3 text-left font-medium">{t("profile.date")}</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-[#2a2d33]">
-          {predictions.map((p) => (
+          {predictions.map((p: PredictionWithAsset) => (
             <tr key={p.id} className="hover:bg-gray-200">
               <td className="px-4 py-3 font-medium text-black">
                 {p.asset.name}
@@ -144,11 +165,11 @@ export default function ProfilePage() {
               <td className="px-4 py-3">
                 {p.result === "correct" ? (
                   <span className="text-green-400 font-semibold">
-                    ✓ Correct
+                    ✓ {t("prediction.result.correct")}
                   </span>
                 ) : p.result === "incorrect" ? (
                   <span className="text-red-400 font-semibold">
-                    ✗ Incorrect
+                    ✗ {t("prediction.result.incorrect")}
                   </span>
                 ) : (
                   "-"
@@ -176,7 +197,7 @@ export default function ProfilePage() {
           >
             <ArrowLeft className="h-5 w-5 text-black group-hover:text-black" />
           </button>
-          <h1 className="text-2xl font text-black">Profile</h1>
+          <h1 className="text-2xl font text-black">{t("profile.my_profile")}</h1>
         </section>
         <div className="grid grid-cols-1 lg:grid-cols-[32%_1fr] gap-8 items-start">
           {/* ✅ LEFT PANEL */}
@@ -205,7 +226,7 @@ export default function ProfilePage() {
               </CardTitle>
               <CardDescription className="flex items-center justify-center text-neutral-400 text-sm mt-1">
                 <Calendar className="h-3.5 w-3.5 mr-1" />
-                Joined{" "}
+                {t("profile.joined")}{" "}
                 {profileLoading
                   ? "..."
                   : profile?.createdAt
@@ -221,13 +242,13 @@ export default function ProfilePage() {
               {isEmailVerified ? (
                 <div className="mt-4 mb-4 px-4 py-1 bg-gray-200 rounded-full inline-block">
                   <span className="text-black text-sm font-medium">
-                    Email Verified
+                    {t("profile.email_verified")}
                   </span>
                 </div>
               ) : (
                 <div className="mt-4 mb-4 px-4 py-1 bg-gray-200 rounded-full inline-block">
                   <span className="text-red text-sm font-medium">
-                    Email Not Verified
+                    {t("profile.email_not_verified")}
                   </span>
                 </div>
               )}
@@ -239,16 +260,18 @@ export default function ProfilePage() {
                   onClick={() => setIsEditing(true)}
                   className="w-40 p-1 bg-[#2563EB] !text-[12px] hover:bg-[#1D4ED8] text-white font-medium rounded-md shadow-sm"
                 >
-                  <Edit className="h-4 w-4 mr-0 " /> Edit Profile
+                  <Edit className="h-4 w-4 mr-0 " /> {t("profile.edit_profile")}
                 </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setShowPasswordChange(true)}
-                  className="w-40 p-1 border !text-[12px] border-[#3A3C42] bg-transparent text-black hover:bg-blue-600 hover:text-white hover:border-blue-600 rounded-md shadow-sm"
-                >
-                  <Lock className="h-4 w-4 mr-0 " /> Change Password
-                </Button>
+                {!userProfile?.isOAuthUser && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setShowPasswordChange(true)}
+                    className="w-40 p-1 border !text-[12px] border-[#3A3C42] bg-transparent text-black hover:bg-blue-600 hover:text-white hover:border-blue-600 rounded-md shadow-sm"
+                  >
+                    <Lock className="h-4 w-4 mr-0 " /> {t("profile.change_password")}
+                  </Button>
+                )}
               </div>
             </CardHeader>
 
@@ -256,9 +279,9 @@ export default function ProfilePage() {
             <CardContent className="space-y-6 px-6 pb-6">
               {userProfile?.bio && (
                 <section>
-                  <h3 className="text-sm font-semibold mb-1">Bio</h3>
+                  <h3 className="text-sm font-semibold mb-1">{t("profile.bio")}</h3>
                   <p className="text-xs text-neutral-400">
-                    {userProfile.bio || "No bio available."}
+                    {userProfile.bio || t("profile.no_bio")}
                   </p>
                 </section>
               )}
@@ -266,13 +289,13 @@ export default function ProfilePage() {
               {/* Scores */}
               <section className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-black">Monthly Score</span>
+                  <span className="text-black">{t("profile.monthly_score")}</span>
                   <span className="font-semibold">
                     {userProfile?.monthlyScore || 0}
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-black">Total Score</span>
+                  <span className="text-black">{t("profile.total_score")}</span>
                   <span className="font-semibold">
                     {userProfile?.totalScore || 0}
                   </span>
@@ -282,14 +305,14 @@ export default function ProfilePage() {
               {/* Accuracy */}
               <section>
                 <div className="flex justify-between text-sm mb-2">
-                  <span className="text-black">Prediction Accuracy</span>
+                  <span className="text-black">{t("profile.prediction_accuracy")}</span>
                   <span className="font-semibold">
                     {accuracyPercentage.toFixed(1)}%
                   </span>
                 </div>
                 <Progress value={accuracyPercentage} className="h-2" />
                 <p className="text-xs text-neutral-500 mt-1">
-                  {correctPredictions} correct out of {evaluatedPredictions}
+                  {t("profile.correct_out_of", { correct: correctPredictions, total: evaluatedPredictions })}
                 </p>
               </section>
               {/* Last Month Rank & Total Predictions */}
@@ -305,7 +328,7 @@ export default function ProfilePage() {
                     )}
                   </div>
                   <div className="text-xs text-black mt-1">
-                    Last Month Rank
+                    {t("profile.last_month_rank")}
                   </div>
                 </div>
 
@@ -320,18 +343,18 @@ export default function ProfilePage() {
                     )}
                   </div>
                   <div className="text-xs text-black mt-1">
-                    Total Predictions
+                    {t("profile.total_predictions")}
                   </div>
                 </div>
               </div>
 
               {/* Social */}
               <section className="pt-2">
-                <h3 className="text-sm font-semibold mb-2">Social</h3>
+                <h3 className="text-sm font-semibold mb-2">{t("profile.social")}</h3>
                 <div className="flex justify-between text-sm">
                   <div className="flex items-center">
                     <Users className="h-4 w-4 mr-2 text-blue-400" />
-                    Followers
+                    {t("profile.followers")}
                   </div>
                   <button
                     onClick={() => setShowFollowers(true)}
@@ -343,7 +366,7 @@ export default function ProfilePage() {
                 <div className="flex justify-between text-sm mt-1">
                   <div className="flex items-center">
                     <User2 className="h-4 w-4 mr-2 text-green-400" />
-                    Following
+                    {t("profile.following")}
                   </div>
                   <button
                     onClick={() => setShowFollowing(true)}
@@ -356,7 +379,7 @@ export default function ProfilePage() {
 
               {/* Account */}
               <section className="pt-2">
-                <h3 className="text-sm font-semibold mb-2">Account</h3>
+                <h3 className="text-sm font-semibold mb-2">{t("profile.account")}</h3>
                 <div className="flex items-center text-xs text-neutral-400 mb-1">
                   <Mail className="h-4 w-4 mr-2" />
                   {user.email}
@@ -365,7 +388,7 @@ export default function ProfilePage() {
                   onClick={() => setShowEmailChange(true)}
                   className="flex items-center text-xs text-blue-400 hover:underline"
                 >
-                  <Edit className="h-3 w-3 mr-1" /> Change Email
+                  <Edit className="h-3 w-3 mr-1" /> {t("profile.change_email")}
                 </button>
               </section>
 
@@ -373,7 +396,7 @@ export default function ProfilePage() {
               <section className="pt-2">
                 <h3 className="text-sm font-semibold mb-2 flex items-center">
                   <Award className="h-4 w-4 mr-2 text-yellow-400" />
-                  Achievement Badges
+                  {t("profile.achievement_badges")}
                 </h3>
                 {badgesLoading ? (
                   <Skeleton className="h-6 w-full" />
@@ -388,13 +411,13 @@ export default function ProfilePage() {
                         {badge.badgeType === "1st_place" && "🥇 "}
                         {badge.badgeType === "2nd_place" && "🥈 "}
                         {badge.badgeType === "3rd_place" && "🥉 "}
-                        {badge.monthYear} - {badge.totalScore} pts
+                        {badge.monthYear} - {badge.totalScore} {t("common.points_short")}
                       </Badge>
                     ))}
                   </div>
                 ) : (
                   <p className="text-xs text-neutral-500">
-                    No badges earned yet
+                    {t("profile.no_badges")}
                   </p>
                 )}
               </section>
@@ -405,7 +428,7 @@ export default function ProfilePage() {
           <Card className="rounded-3xl border-0 bg-white shadow-[0_0_10px_rgba(0,0,0,0.15)] text-black h-full flex flex-col">
             <CardHeader className="flex items-baseline pb-3 border-b border-gray-200 mb-5">
               <CardTitle className="text-lg font-semibold text-black">
-                Latest Activity
+                {t("profile.latest_activity")}
               </CardTitle>
             </CardHeader>
 
@@ -416,25 +439,25 @@ export default function ProfilePage() {
                     value="all"
                     className="data-[state=active]:bg-[#2563EB] text-black data-[state=active]:text-white text-sm font-medium"
                   >
-                    All
+                    {t("profile.all")}
                   </TabsTrigger>
                   <TabsTrigger
                     value="active"
                     className="text-sm font-medium text-black data-[state=active]:bg-[#2563EB] data-[state=active]:text-white"
                   >
-                    Active
+                    {t("profile.active_predictions")}
                   </TabsTrigger>
                   <TabsTrigger
                     value="evaluated"
                     className="text-sm font-medium text-black data-[state=active]:bg-[#2563EB] data-[state=active]:text-white"
                   >
-                    Evaluated
+                    {t("profile.evaluated")}
                   </TabsTrigger>
                   <TabsTrigger
                     value="correct"
                     className="text-sm font-medium text-black data-[state=active]:bg-[#2563EB] data-[state=active]:text-white"
                   >
-                    Correct
+                    {t("profile.correct_predictions")}
                   </TabsTrigger>
                 </TabsList>
 
@@ -493,30 +516,10 @@ export default function ProfilePage() {
           <DialogContent className="max-w-md bg-[#1E1F25] border border-[#2C2F36] text-black rounded-xl backdrop-blur-md">
             <DialogHeader>
               <DialogTitle className="text-black text-lg">
-                Followers
+                {t("profile.followers")}
               </DialogTitle>
             </DialogHeader>
-            {userProfile?.followers && userProfile.followers.length > 0 ? (
-              <ul className="space-y-2 mt-2 max-h-60 overflow-y-auto">
-                {userProfile.followers.map((follower: any) => (
-                  <li
-                    key={follower.id}
-                    className="flex items-center justify-between p-2 rounded-md hover:bg-[#2C2F36]/70 transition-all"
-                  >
-                    <div className="flex items-center gap-3">
-                      <img
-                        src={follower.avatar || "/images/default-avatar.png"}
-                        alt={follower.username}
-                        className="h-8 w-8 rounded-full object-cover"
-                      />
-                      <span className="text-sm">{follower.username}</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-sm text-black mt-2">No followers yet</p>
-            )}
+            <p className="text-sm text-black mt-2">{t("profile.no_followers")}</p>
           </DialogContent>
         </Dialog>
 
@@ -525,32 +528,12 @@ export default function ProfilePage() {
           <DialogContent className="max-w-md bg-[#1E1F25] border border-[#2C2F36] text-black rounded-xl backdrop-blur-md">
             <DialogHeader>
               <DialogTitle className="text-black text-lg">
-                Following
+                {t("profile.following")}
               </DialogTitle>
             </DialogHeader>
-            {userProfile?.following && userProfile.following.length > 0 ? (
-              <ul className="space-y-2 mt-2 max-h-60 overflow-y-auto">
-                {userProfile.following.map((followed: any) => (
-                  <li
-                    key={followed.id}
-                    className="flex items-center justify-between p-2 rounded-md hover:bg-[#2C2F36]/70 transition-all"
-                  >
-                    <div className="flex items-center gap-3">
-                      <img
-                        src={followed.avatar || "/images/default-avatar.png"}
-                        alt={followed.username}
-                        className="h-8 w-8 rounded-full object-cover"
-                      />
-                      <span className="text-sm">{followed.username}</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-sm text-neutral-400 mt-2">
-                Not following anyone yet
-              </p>
-            )}
+            <p className="text-sm text-neutral-400 mt-2">
+              {t("profile.no_following")}
+            </p>
           </DialogContent>
         </Dialog>
       </main>
@@ -596,7 +579,7 @@ export default function ProfilePage() {
             className="max-w-xl w-full bg-gray-300 border border-0 text-black rounded-xl p-6 shadow-xl font-poppins"
             onClick={(e) => e.stopPropagation()}
           >
-            <EmailChangeForm onCancel={() => setShowEmailChange(false)} />
+            <EmailChangeForm />
           </div>
         </div>
       )}

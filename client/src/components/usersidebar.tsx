@@ -8,6 +8,7 @@ import { LanguageSelectorButton } from "@/components/language-selector";
 import { Badge } from "@/components/ui/badge";
 import { useQuery } from "@tanstack/react-query";
 import { NotificationBell } from "@/components/notification-bell";
+import { useLanguage } from "@/hooks/use-language";
 
 interface CoinCatalogEntry {
   id: string;
@@ -29,6 +30,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isMobile = false }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [location, setLocation] = useLocation();
   const { user, logoutMutation } = useAuth();
+  const { t } = useLanguage();
 
   // Search state
   const [searchQuery, setSearchQuery] = useState("");
@@ -167,21 +169,21 @@ const Sidebar: React.FC<SidebarProps> = ({ isMobile = false }) => {
           <Link href="/">
             <button className={btnClass("/")}>
               <LayoutGrid size={18} />
-              {!collapsed && <span>Overview</span>}
+              {!collapsed && <span>{t("sidebar.overview")}</span>}
             </button>
           </Link>
 
           <Link href="/chart">
             <button className={btnClass("/chart")}>
               <LineChart size={18} />
-              {!collapsed && <span>Chart</span>}
+              {!collapsed && <span>{t("sidebar.chart")}</span>}
             </button>
           </Link>
 
           <Link href="/leaderboard">
             <button className={btnClass("/leaderboard")}>
               <Trophy size={18} />
-              {!collapsed && <span>Leaderboard</span>}
+              {!collapsed && <span>{t("sidebar.leaderboard")}</span>}
             </button>
           </Link>
         </nav>
@@ -199,10 +201,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isMobile = false }) => {
                 onChange={(e) => handleSearchInput(e.target.value)}
                 placeholder={
                   selectedAssetType === "crypto"
-                    ? "Search Bitcoin, Ethereum..."
+                    ? t("sidebar.search_placeholder")
                     : selectedAssetType === "stock"
-                    ? "Search Apple, Tesla..."
-                    : "Search EUR/USD, GBP/USD..."
+                    ? t("sidebar.search_placeholder_stock")
+                    : t("sidebar.search_placeholder_forex")
                 }
                 className="w-full bg-[#2B3139] text-white placeholder:text-gray-400 rounded-lg h-10 pl-10 pr-4 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 onFocus={() => setShowSuggestions(searchQuery.length > 0)}
@@ -364,9 +366,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isMobile = false }) => {
               }}
               className="w-full bg-[#2B3139] border border-gray-600 text-white text-sm rounded-lg px-3 py-2 h-10 outline-none cursor-pointer focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
-              <option value="crypto" className="bg-[#2B3139]">Cryptocurrency</option>
-              <option value="stock" className="bg-[#2B3139]">Stocks</option>
-              <option value="forex" className="bg-[#2B3139]">Forex</option>
+              <option value="crypto" className="bg-[#2B3139]">{t("sidebar.cryptocurrency")}</option>
+              <option value="stock" className="bg-[#2B3139]">{t("sidebar.stocks")}</option>
+              <option value="forex" className="bg-[#2B3139]">{t("sidebar.forex")}</option>
             </select>
           </div>
         )}
@@ -379,7 +381,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isMobile = false }) => {
         <Link href="/profile">
           <button className={btnClass("/profile")}>
             <User size={18} />
-            {!collapsed && <span>Profile</span>}
+            {!collapsed && <span>{t("sidebar.profile")}</span>}
           </button>
         </Link>
 
@@ -390,7 +392,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isMobile = false }) => {
           } py-3 rounded-l-xl hover:bg-white  hover:text-black text-white transition`}
         >
           <LogOut size={18} />
-          {!collapsed && <span>Logout</span>}
+          {!collapsed && <span>{t("sidebar.logout")}</span>}
         </button>
       </div>
     </aside>

@@ -189,33 +189,31 @@ export function EnhancedPredictionForm({
 
           {/* Direction Buttons */}
           <div className="space-y-2">
-            <Label className="text-sm text-black">Direction</Label>
+            <Label className="text-sm text-black font-medium">Direction</Label>
             <div className="flex gap-3">
               <Button
                 type="button"
-                variant="outline"
                 onClick={() => form.setValue("direction", "up")}
-                className={`flex-1 py-3 !text-black rounded-lg text-sm font-medium hover:bg-green-700 hover:!text-white transition-colors ${
+                className={`flex-1 py-6 rounded-xl text-base font-medium transition-all ${
                   form.watch("direction") === "up"
-                    ? "bg-green-700  border-green-600 !text-white"
-                    : "border-green-700"
+                    ? "bg-green-600 text-white border-2 border-green-600"
+                    : "bg-white text-black border-2 border-gray-300 hover:bg-green-600 hover:text-white hover:border-green-600"
                 }`}
               >
-                <TrendingUp className="h-4 w-4 mr-2" />
+                <TrendingUp className="h-5 w-5 mr-2" />
                 Up
               </Button>
 
               <Button
                 type="button"
-                variant="outline"
                 onClick={() => form.setValue("direction", "down")}
-                className={`flex-1 py-3 !text-black rounded-lg text-sm font-medium hover:bg-red-700 hover:!text-white transition-colors ${
+                className={`flex-1 py-6 rounded-xl text-base font-medium transition-all ${
                   form.watch("direction") === "down"
-                    ? "bg-red-700  border-red-600 !text-white"
-                    : "border-red-700"
+                    ? "bg-red-600 text-white border-2 border-red-600"
+                    : "bg-white text-black border-2 border-gray-300 hover:bg-red-600 hover:text-white hover:border-red-600"
                 }`}
               >
-                <TrendingUp className="h-4 w-4 mr-2 rotate-180" />
+                <TrendingUp className="h-5 w-5 mr-2 rotate-180" />
                 Down
               </Button>
             </div>

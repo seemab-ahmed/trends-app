@@ -4,8 +4,10 @@ import React from "react";
 import { useRoute, useLocation } from "wouter"; // ✅ <-- FIXED IMPORT
 import TradingViewChart from "@/components/tradingview-chart";
 import { ArrowLeft } from "lucide-react"; // ✅ Import the back icon
+import { useLanguage } from "@/hooks/use-language";
 
 export default function ChartPage() {
+  const { t } = useLanguage();
   const [, params] = useRoute("/chart/:symbol?");
   const [_, setLocation] = useLocation(); // ✅ Correct destructure
 
@@ -31,7 +33,7 @@ export default function ChartPage() {
           </button>
 
           {/* Title */}
-          <h1 className="text-2xl font text-white">Trading Chart</h1>
+          <h1 className="text-2xl font text-white">{t("chart.title")}</h1>
         </section>
 
         {/* Chart Component */}

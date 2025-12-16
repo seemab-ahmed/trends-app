@@ -14,6 +14,7 @@ import {
 import { Eye, EyeOff, Lock, Save, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { API_ENDPOINTS } from "@/lib/api-config";
+import { getAuthToken } from "@/lib/queryClient";
 
 interface PasswordChangeFormProps {
   onCancel: () => void;
@@ -37,11 +38,16 @@ export default function PasswordChangeForm({
       currentPassword: string;
       newPassword: string;
     }) => {
+      const token = await getAuthToken();
+      if (!token) {
+        throw new Error("Authentication required");
+      }
+
       const response = await fetch(buildApiUrl("/api/user/change-password"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(data),
       });

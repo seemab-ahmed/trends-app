@@ -42,6 +42,7 @@ export interface UserProfile {
     rank: number;
     totalScore: number;
   }>;
+  isOAuthUser?: boolean; // True if user logged in with OAuth (Google, etc.)
 }
 
 export interface UserStats {
@@ -126,6 +127,7 @@ export async function getUserProfile(userId: string, viewerId?: string): Promise
     lastMonthRank: profile.lastMonthRank,
     isFollowing,
     badges,
+    isOAuthUser: !user.password || user.password === "", // Check if OAuth user (no password)
   };
 }
 

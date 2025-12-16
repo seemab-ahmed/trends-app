@@ -17,7 +17,6 @@ import { DollarSign } from "lucide-react";
 import { Redirect, useLocation } from "wouter";
 import { ArrowLeft } from "lucide-react";
 import TradingViewChartCoin from "@/components/tradingview-coin";
-import { mapToTradingViewSymbol } from "@/lib/tradingview-map";
 
 export default function PredictionPage() {
   const [, params] = useRoute("/predict/:assetSymbol");
@@ -164,8 +163,8 @@ export default function PredictionPage() {
               {asset.type}
             </Badge>
             <Badge
-              variant={asset.isActive ? "white border " : "white "}
-              className={asset.isActive ? "bg-blue-600 border-blue-600" : "bg-gray-600 border-blue-600"}
+              variant="outline"
+              className={asset.isActive ? "bg-blue-600 text-white border-blue-600" : "bg-gray-600 text-white border-gray-600"}
             >
               {asset.isActive ? "Active" : "Inactive"}
             </Badge>
@@ -200,7 +199,6 @@ export default function PredictionPage() {
                 t={(key: string) => key}
                 displayData={enhancedConsensusData}
                 assetSymbol={assetSymbol || ""}
-                livePriceData={livePriceData}
               />
             ) : (
               <div className="text-black">No consensus data</div>
@@ -211,8 +209,6 @@ export default function PredictionPage() {
           <div className="bg-white shadow-[0_0_10px_rgba(0,0,0,0.15)]  border border-0 rounded-3xl  mt-4">
             <EnhancedPredictionForm
               assetSymbol={asset.symbol}
-              onSuccess={() => window.location.reload()}
-              currentPrice={livePriceData?.price}
             />
           </div>
         </div>
