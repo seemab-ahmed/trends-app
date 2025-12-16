@@ -191,10 +191,10 @@ export function EnhancedPredictionForm({
           <div className="space-y-2">
             <Label className="text-sm text-black font-medium">Direction</Label>
             <div className="flex gap-3">
-              <Button
+              <button
                 type="button"
                 onClick={() => form.setValue("direction", "up")}
-                className={`flex-1 py-6 rounded-xl text-base font-medium transition-all ${
+                className={`flex-1 py-2 rounded-xl text-base font-medium transition-all inline-flex items-center justify-center focus:outline-none ${
                   form.watch("direction") === "up"
                     ? "bg-green-600 text-white border-2 border-green-600"
                     : "bg-white text-black border-2 border-gray-300 hover:bg-green-600 hover:text-white hover:border-green-600"
@@ -202,12 +202,12 @@ export function EnhancedPredictionForm({
               >
                 <TrendingUp className="h-5 w-5 mr-2" />
                 Up
-              </Button>
+              </button>
 
-              <Button
+              <button
                 type="button"
                 onClick={() => form.setValue("direction", "down")}
-                className={`flex-1 py-6 rounded-xl text-base font-medium transition-all ${
+                className={`flex-1 py-2 rounded-xl text-base font-medium transition-all inline-flex items-center justify-center focus:outline-none ${
                   form.watch("direction") === "down"
                     ? "bg-red-600 text-white border-2 border-red-600"
                     : "bg-white text-black border-2 border-gray-300 hover:bg-red-600 hover:text-white hover:border-red-600"
@@ -215,7 +215,7 @@ export function EnhancedPredictionForm({
               >
                 <TrendingUp className="h-5 w-5 mr-2 rotate-180" />
                 Down
-              </Button>
+              </button>
             </div>
           </div>
 
