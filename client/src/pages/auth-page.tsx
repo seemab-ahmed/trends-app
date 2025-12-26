@@ -7,7 +7,7 @@ import { z } from "zod";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Image } from "lucide-react";
-import Authbg  from "../../public/images/auth-bg.png"
+import Authbg  from "../../public/images/profile-bg.png"
 import { Link } from "wouter";
 import { useLanguage } from "@/hooks/use-language";
 import {
@@ -270,7 +270,7 @@ export default function AuthPage() {
     // bg-gradient-to-l from-[#22263D] via-[#11131E] to-[#05070C] 
     <div className="min-h-screen flex flex-col lg:flex-row relative  ">
       <div className="absolute top-0 left-0 w-full h-full">
-        <img src={Authbg} alt="Auth Background" className="w-full h-full object-cover" />
+        <img src={Authbg} alt="Auth Background" className="w-full h-full object-cover" width={2000}/>
       </div>
 
       <div className="flex-1 relative z-[3] flex items-center justify-center py-12 md:px-8 px-5 lg:px-4">
